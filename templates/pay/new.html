@@ -1,0 +1,27 @@
+{% extends "pay/pay.html" %}
+		
+{% block breadcrumb-pay %}
+<li><a href="/pago/nuevo">Individual</a></li>
+{% endblock %}
+
+
+
+{% block payunique %}
+class="list-group-item active"
+{% endblock %}	
+
+
+{% block context %}
+{% load bootstrap %}
+
+<form id='' method='POST' action='' class="form-horizontal" role="form"> 
+	{% csrf_token %}
+	{{form|bootstrap_horizontal}}
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="reset" class="btn btn-danger">Cancelar</button>
+			<button type="submit" class="btn btn-success">Enviar</button>
+		</div>
+	</div>
+</form>
+{% endblock %}

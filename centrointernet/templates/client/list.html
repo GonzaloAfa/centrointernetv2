@@ -1,0 +1,68 @@
+{% extends "client/client.html" %}
+
+{% block breadcrumb-client %}
+<li><a href="/client">Listado</a></li>
+{% endblock %}
+
+{% block clientlist %}
+class="list-group-item active"
+{% endblock %}		
+
+{% block context %}
+		
+	<h1>Clientes</h1>
+	<table  class="table table-condensed">
+  		<thead>
+  		<tr>
+            <th>Usuario</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Telefono</th>
+            <th>Opciones</th>
+          </tr>
+         </thead>
+        <tbody>
+
+		{% for element in list %}
+		<tr>
+			<td><a href='/profile/{{element.username}}'>{{element.username|capfirst}}</a></td>
+			<td>{{element.first_name|capfirst}}</td>
+			<td>{{element.last_name|capfirst}}</td>
+			<td>{{element.phone}}</td>
+			<td>
+				<button type="button" class="btn btn-xs btn-default">
+					<a href='/profile/{{element.username}}'>
+						<span class="glyphicon glyphicon-new-window"></span> Ver</a>
+				</button>
+				<button type="button" class="btn btn-xs btn-default">
+					<a href="#"><span class="glyphicon glyphicon-edit"></span> Editar</a>
+				</button>
+			</td>
+		</tr>
+		{% endfor %}
+        </tbody>
+
+  	</table>	
+
+{%if list %}
+
+	<ul class="pagination">
+		
+	  {%if list.has_previous %}
+		  <li><a href="/client/page/{{list.previous_page_number}}">&laquo;</a></li>
+	  {% else %}
+		  <li><a href="/client/page/1">&laquo;</a></li>
+	  {% endif %}
+
+	  {%if list.has_next %}
+		  <li><a href="/client/page/{{list.next_page_number}}">&raquo;</a></li>
+	  {% endif %}
+	  
+
+	</ul>
+
+	<h4>Página {{list.number}} de {{list.paginator.num_pages}}</h4>
+{% endif%}
+
+
+{% endblock %}

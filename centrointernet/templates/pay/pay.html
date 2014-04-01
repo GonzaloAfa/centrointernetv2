@@ -1,0 +1,22 @@
+{% extends "sign-in.html" %}
+
+{% block title %}Pagos - CentroInternet{% endblock %}
+
+{% block breadcrumb %}
+<li><a href="/pay">Pagos</a></li>
+{% block breadcrumb-pay %}
+{% endblock %}
+
+{% endblock %}
+
+
+{% block pay %} 
+class='active'
+{% endblock%}
+
+
+{% block link-sidebar %}  
+ 	<a href="/pay" {% block paylist %}class="list-group-item"{% endblock %}>Listado</a>
+    <a href="/pay/new" {% block payunique %}class="list-group-item"{% endblock %}>Individual</a>
+    <a href="#" {% block paygroup %}class="list-group-item"{% endblock %}>Grupal</a>
+{% endblock %}

@@ -1,0 +1,160 @@
+{% extends "sign-in.html" %}
+
+{% block breadcrumb %}
+{% endblock %}
+
+{% block home %} 
+class='active'
+{% endblock%}
+
+
+{% block link-sidebar %}  
+	<a href="/cliente" class="list-group-item">Usuario</a>
+	<a href="/problema" class="list-group-item">Problemas</a>
+	<a href="/pago" class="list-group-item">Pagos</a>
+	<a href="#" class="list-group-item ">Cupones</a>
+{% endblock %}
+
+
+{% block context %}
+      <div class="row">
+        <div class="col-sm-6">
+          
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+              	Últimos clientes ingresados 
+				<a href="/cliente"> <span class='glyphicon glyphicon-new-window'></span></a>
+              </h3>
+            </div>
+            <div class="panel-body">
+				<table class="table table-striped">
+					<thead>
+			          <tr>
+			            <th>Usuario</th>
+			            <th>Red</th>
+			            <th>Fecha</th>
+			          </tr>
+			        </thead>
+			        <tbody>
+
+					{% for element in clients %}
+					<tr>
+						<td><a href='/perfil/{{element.username}}'>{{element.username|capfirst}}</a></td>
+						<td>{{element.red}}</td>
+						<td>{{element.date_start|date:'SHORT_DATE_FORMAT'}}</td>
+					</tr>
+					{% endfor %}
+			        </tbody>
+            	</table>
+            </div>
+          </div>
+          
+          <div class="panel panel-success">
+            <div class="panel-heading">
+              <h3 class="panel-title">Últimos pagos ingresados
+				<a href="/pago"> <span class='glyphicon glyphicon-new-window'></span></a>
+              </h3>
+            </div>
+            <div class="panel-body">
+				<table class="table table-striped">
+					<thead>
+			          <tr>
+			            <th>Usuario</th>
+			            <th>Medio</th>
+			            <th>Cantidad</th>
+			            <th>Fecha</th>
+
+			          </tr>
+			        </thead>
+			        <tbody>
+			          
+					{% for element in pays %}
+					<tr>
+						<td><a href='/perfil/{{element.cliente}}'>{{element.cliente|capfirst}}</a></td>
+						<td>{{element.metodo_pago}}</td>
+						<td>{{element.cantidad}}</td>
+						<td>{{element.datetime |date:'SHORT_DATE_FORMAT'}}</td>
+					</tr>
+					{% endfor %}
+
+
+			        </tbody>
+            	</table>
+            </div>
+          </div>
+
+        
+
+        </div><!-- /.col-sm-6 -->
+
+        <div class="col-sm-6">
+
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Últimos problemas ingresados
+				<a href="/problema"> <span class='glyphicon glyphicon-new-window'></span></a>
+              </h3>
+            </div>
+            <div class="panel-body">
+            	<table class="table table-striped">
+					<thead>
+			          <tr>
+			            <th>Cliente</th>
+			            <th>Tipo problema</th>
+			          	<th>Estado</th>
+			          </tr>
+			        </thead>
+			        <tbody>
+			          
+					{% for element in problems %}
+					<tr>
+						<td><a href='/perfil/{{element.cliente}}'>{{element.cliente|capfirst}}</a></td>
+						<td>{{element.tipo_problema}}</td>
+						<td>{{element.status}}</td>
+					</tr>
+					{% endfor %}
+					
+					</tbody>
+            	</table>
+            </div>
+          </div>
+
+          <div class="panel panel-danger">
+            <div class="panel-heading">
+              <h3 class="panel-title">Usuarios Morosos</h3>
+            </div>
+            <div class="panel-body">
+				<table class="table table-striped">
+					<thead>
+			          <tr>
+			            <th>#</th>
+			            <th>Usuario</th>
+			            <th>Deuda</th>
+			          </tr>
+			        </thead>
+			        <tbody>
+			          <tr>
+			            <td>1</td>
+			            <td>Mark</td>
+			            <td>Otto</td>
+			          </tr>
+			          <tr>
+			            <td>2</td>
+			            <td>Jacob</td>
+			            <td>@fat</td>
+			          </tr>
+			          <tr>
+			            <td>3</td>
+			            <td>Larry</td>
+			            <td>the Bird</td>
+			          </tr>
+			        </tbody>
+            	</table>
+            </div>
+          </div>
+        </div><!-- /.col-sm-6 -->
+      </div>
+
+
+{% endblock %}  

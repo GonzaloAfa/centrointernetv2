@@ -1,0 +1,29 @@
+{% extends "client/client.html" %}
+		
+
+{% block breadcrumb-client %}
+<li><a href="/client/new">Agregar</a></li>
+{% endblock %}
+
+
+{% block clientnew %}
+class="list-group-item active"
+{% endblock %}	
+
+
+{% block context %}
+
+{% load bootstrap %}
+
+
+	<form id='' method='POST' action='' class="form-horizontal" role="form"> 
+		{% csrf_token %}
+		{{form|bootstrap_horizontal}}
+		<div class="form-group">
+	   		<div class="col-sm-offset-2 col-sm-10">
+				<button type="reset" class="btn btn-danger">Cancelar</button>
+				<button type="submit" class="btn btn-success">Enviar</button>
+			</div>
+		</div>
+	</form>
+{% endblock %}

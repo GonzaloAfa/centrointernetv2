@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)http://getbootstrap.com/examples/offcanvas/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="#">
+
+    <title>{% block title %}CentroInternet{% endblock%}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{STATIC_URL}}css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body style="">
+      <div class="container">
+          <div class="navbar navbar-inverse">
+          
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">CentroInternet</a>
+          </div>
+          
+          {% block navbar %}  
+          <ul class="nav navbar-nav">
+            <li {% block home %} {% endblock%}><a href="/inicio">Inicio</a></li>
+            <li {% block client %} {% endblock%}><a href="/cliente">Clientes</a></li>
+            <li {% block problem %} {% endblock%}><a href="/problema">Problemas</a></li>
+            <li {% block pay %} {% endblock%}><a href="/pago">Pagos</a></li>
+            <li {% block cup %} {% endblock%}><a href="#">Cupones</a></li>
+          </ul>
+          {% endblock %}
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"></a></li>
+          </ul>
+          <p class="navbar-text navbar-right">Hola user.username|capfirst <a href="/logout" class="navbar-link">(Salir)</a></p>
+          
+
+        </div><!-- /.nav-collapse -->
+        
+        <ol class="breadcrumb">
+          <li><a href="/inicio">Inicio</a></li>
+          {% block breadcrumb %}
+          <li><a href="#">Library</a></li>
+          <li class="active">Data</li>
+          {% endblock %}
+        </ol>
+          
+      </div><!-- /.container -->
+    
+    <div class="container">
+
+      <div class="row row-offcanvas row-offcanvas-right">
+     
+        
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+          <div class="list-group">
+          {% block link-sidebar %}  
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item ">Link</a>
+          {% endblock %}
+          </div>
+        </div><!--/span-->
+
+
+        <!-- Contenido-->
+        <div class="col-xs-12 col-sm-9">
+
+          <p class="pull-right visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+          </p>
+
+          {% block context %}
+            <h2>Inserte el "block context" acá</h2>  
+          {% endblock %}  
+        
+        </div><!--/span-->
+
+      </div><!--/row-->
+
+      <hr>
+
+   <!-- FOOTER -->
+      <footer>
+        <p>© 2014 AfaChile  </p>
+      </footer>
+
+    </div><!--/.container-->
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{{STATIC_URL}}js/jquery-1.10.2.min.js"></script>
+    <script src="{{STATIC_URL}}js/bootstrap.min.js"></script>
+  
+
+</body></html>

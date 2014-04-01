@@ -1,0 +1,112 @@
+{% extends "client/client.html" %}
+		
+{% block context %}
+
+	<h1>Usuario {{cliente.username|capfirst}} </h1>
+	<hr>
+    
+    <dl class="dl-horizontal">
+    	<dt>Nombre</dt>
+		<dd>{{cliente.nombre|capfirst}} {{cliente.apellido|capfirst}} </dd>
+
+		<dt>Estado</dt>
+		<dd><span class="label label-success">{{cliente.status}}</span></dd>
+	<!--	
+		<dd><span class="label label-warning">Moroso</span></dd>
+		<dd><span class="label label-danger">Cortado</span></dd>
+		<dd><span class="label label-default">Nulidad</span></dd>
+    -->
+
+
+        <dt>Dirección</dt>
+        <dd>{{cliente.direccion}} </dd>
+		
+		<dt>Teléfono</dt>
+		<dd>{{cliente.celular}}</dd>
+        
+		<dt>Email</dt>
+		<dd>{{cliente.email}}</dd>
+        
+	<hr>
+	    <dt>Ingreso</dt>
+		<dd>{{cliente.date_start}}</dd>
+
+        <dt>Servicio</dt>
+        <dd>{{cliente.servicio}} </dd>
+
+        <dt>Red de conexión</dt>
+		<dd>{{cliente.red}}</dd>
+	</dl>
+    <hr>
+	
+<div class="row">
+        <div class="col-sm-6">
+          
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Histórico</h3>
+            </div>
+            <div class="panel-body">
+				<table class="table table-hover">
+					<thead>
+			          <tr>
+			          	<th>Tipo</th>
+			            <th>Medio</th>
+			            <th>Monto</th>
+			            <th>Fecha</th>
+			          </tr>
+			        </thead>
+			        <tbody>
+
+			       	{% for element in historico %}
+			         <tr>
+			         	<td>{{element.tipo_historico}}</td>
+						<td>{{element.metodo_pago}}</td>
+						<td>{{element.cantidad}}</td>
+						<td>{{element.datetime|date:'SHORT_DATETIME_FORMAT'}}</td>
+					</tr>
+			       	{% endfor %}
+
+			        </tbody>
+            	</table>
+            </div>
+          </div>
+          
+
+        
+
+        </div><!-- /.col-sm-6 -->
+
+        <div class="col-sm-6">
+
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Problemas</h3>
+            </div>
+            <div class="panel-body">
+            	<table class="table table-hover">
+					<thead>
+			          <tr>
+			            <th>Fecha</th>
+			            <th>Tipo</th>
+			            <th>Estado</th>
+			          </tr>
+			        </thead>
+			        <tbody>
+
+			       	{% for element in problemas %}
+			          <tr>
+						<td>{{element.datetime|date:'SHORT_DATETIME_FORMAT'}}</td>
+						<td>{{element.tipo_problema}}</td>
+						<td>{{element.status}}</td>
+					</tr>
+			       	{% endfor %}
+			        </tbody>
+            	</table>
+            </div>
+          </div>
+
+        </div><!-- /.col-sm-6 -->
+      </div>
+
+{% endblock %}  
