@@ -26,26 +26,26 @@ def inicio(request):
     pagos = Historico.objects.filter( tipo_historico=PAGO).order_by('datetime').reverse()[:5]
     return render_to_response('home/home.html', {'clients': clientes, 'problems': problemas, 'pays': pagos }, context_instance=RequestContext(request))
 
-def ingresar(request):
-    if not request.user.is_anonymous():
-        return HttpResponseRedirect('/inicio')
-    if request.method == 'POST':
-        form    = AuthenticationForm(request.POST)
-        if form.is_valid:
-            username    = request.POST['username']
-            password    = request.POST['password']
-            access      = authenticate(username=username, password=password)
-            if access is not None:
-                if access.is_active:
-                    login(request, access)
-                    return HttpResponseRedirect('/inicio')
-                else:
-                    return render_to_response('index.html', context_instance=RequestContext(request))
-            else:
-                return render_to_response('index.html', context_instance=RequestContext(request))
-    else:
-        form = AuthenticationForm()
-    return render_to_response('index.html', {'formulario':form}, context_instance=RequestContext(request))
+# def ingresar(request):
+#     if not request.user.is_anonymous():
+#         return HttpResponseRedirect('/inicio')
+#     if request.method == 'POST':
+#         form    = AuthenticationForm(request.POST)
+#         if form.is_valid:
+#             username    = request.POST['username']
+#             password    = request.POST['password']
+#             access      = authenticate(username=username, password=password)
+#             if access is not None:
+#                 if access.is_active:
+#                     login(request, access)
+#                     return HttpResponseRedirect('/inicio')
+#                 else:
+#                     return render_to_response('index.html', context_instance=RequestContext(request))
+#             else:
+#                 return render_to_response('index.html', context_instance=RequestContext(request))
+#     else:
+#         form = AuthenticationForm()
+#     return render_to_response('index.html', {'formulario':form}, context_instance=RequestContext(request))
 
 
 def user_login(request):
