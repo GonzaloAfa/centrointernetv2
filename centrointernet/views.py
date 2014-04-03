@@ -47,6 +47,7 @@ def ingresar(request):
         form = AuthenticationForm()
     return render_to_response('index.html', {'formulario':form}, context_instance=RequestContext(request))
 
+
 def user_login(request):
 	if not request.user.is_anonymous():
 		return HttpResponseRedirect('/inicio')
@@ -72,7 +73,7 @@ def user_login(request):
 	else:
 		return render_to_response('login.html', context_instance=RequestContext(request))
 
-@login_required(login_url='/index')
+@login_required(login_url='/inicio')
 def cerrar(request):
     logout(request)
     return HttpResponseRedirect('/')

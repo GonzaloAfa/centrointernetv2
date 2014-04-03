@@ -1,6 +1,8 @@
 from django.shortcuts import render
 
 from problemas.models import Problema
+from clientes.models import Cliente
+
 # Create your views here.
 
 from problemas.forms import NuevoProblema
@@ -51,7 +53,8 @@ def nuevo_problema(request):
 def detalle_problema(request, id_problem):
     problema         = get_object_or_404(Problema, id = id_problem)
     cliente          = get_object_or_404(Cliente, username=problema.cliente)
-    lista_problemas  = Problem.objects.filter(client = problema.cliente).order_by('datetime').reverse()[:5]
+    lista_problemas  = Problema.objects.filter(cliente = problema.cliente).order_by('datetime').reverse()[:5]
     
-    return render_to_response('problem/detail.html', {'problem': problema, 'client': cliente,
-     'list_problem': lista_problemas}, context_instance=RequestContext(request))
+    return render_to_response('problem/detail.html', 
+        {'problem': problema, 'client': cliente, 'list_problem': lista_problemas},
+         context_instance=RequestContext(request))

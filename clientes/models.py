@@ -32,7 +32,7 @@ class Cliente(models.Model):
 
 	servicio 		= models.ForeignKey(Servicio)
 	status 			= models.ForeignKey(ClienteStatus)
-	red 			=	models.ForeignKey(Red)
+	red 			= models.ForeignKey(Red)
 
 	email			= models.EmailField()
 	celular			= models.CharField(max_length=20, help_text="Ejemplo: +56 9 xxxx xxxx")
