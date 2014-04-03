@@ -18,6 +18,8 @@ urlpatterns = patterns('',
 	url(r'^cliente/page/(?P<page>\d+)$','clientes.views.lista_clientes'),
 	url(r'^cliente/nuevo/$','clientes.views.nuevo_cliente'),
 	url(r'^perfil/(?P<username>\w+)$','clientes.views.perfil_cliente'),
+	url(r'^perfil/editar/(?P<username>\w+)$','clientes.views.modificar_cliente'),
+	
 	
 	url(r'^problema/$','problemas.views.problemas'),
 	url(r'^problema/page/(?P<page>\d+)$','problemas.views.lista_problemas'),

@@ -10,8 +10,7 @@ from problemas.models import Problema
 from pagos.models import Historico
 
 
-from clientes.forms import NuevoCliente
-
+from clientes.forms import NuevoCliente 
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
@@ -57,6 +56,50 @@ def nuevo_cliente(request):
     return render_to_response('client/new.html',{'form':form}, context_instance=RequestContext(request))
 
 
+def modificar_cliente(request, username):
+    p = get_object_or_404(Cliente, username = username)
+
+    if request.method == 'POST':
+        form    = NuevoCliente(request.POST, request.FILES)
+        if form.is_valid():
+            p.username  = form.cleaned_data['username']
+            p.nombre    = form.cleaned_data['nombre']
+            p.apellido  = form.cleaned_data['apellido']
+
+            p.rut       = form.cleaned_data['rut'] 
+            p.direccion = form.cleaned_data['direccion']
+
+            p.servicio  = form.cleaned_data['servicio']
+            p.status    = form.cleaned_data['status'] 
+            p.red       = form.cleaned_data['red']
+
+            p.email     = form.cleaned_data['email']
+            p.celular   = form.cleaned_data['celular'] 
+
+            p.save()
+            return HttpResponseRedirect('/cliente')
+    if request.method == 'GET':
+        form = NuevoCliente(initial = {
+            'username'      : p.username,
+            'nombre'        : p.nombre,
+            'apellido'      : p.apellido,
+
+            'rut'           : p.rut,
+            'direccion'     : p.direccion,
+
+            'servicio'      : p.servicio,
+            'status'        : p.status,
+            'red'           : p.red,
+            'email'         : p.email,
+            'celular'       : p.celular,
+            })
+
+    return render_to_response('client/new.html',
+        {'form':form}, context_instance=RequestContext(request))
+
+
+
+
 def perfil_cliente(request, username):
     cliente     = get_object_or_404(Cliente, username = username)
     problema    = Problema.objects.filter(cliente=cliente)[:5]
@@ -64,4 +107,3 @@ def perfil_cliente(request, username):
     return render_to_response('client/profile.html',
         {'cliente': cliente, 'problemas': problema, 'historico':historico},context_instance=RequestContext(request))
 
-# 

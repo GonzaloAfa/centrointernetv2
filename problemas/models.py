@@ -18,7 +18,7 @@ class EstadoProblema(models.Model):
 class Problema (models.Model):
 	cliente 		= models.ForeignKey(Cliente)
 	tipo_problema 	= models.ForeignKey(TipoProblema)
-	comentario 		= models.TextField()
+	comentario 		= models.TextField(blank=False)
 	datetime 		= models.DateTimeField(auto_now=True)
 	status 			= models.ForeignKey(EstadoProblema)
 	descuento		= models.IntegerField()
