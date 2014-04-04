@@ -25,6 +25,7 @@ urlpatterns = patterns('',
 	url(r'^problema/page/(?P<page>\d+)$','problemas.views.lista_problemas'),
 	url(r'^problema/nuevo$','problemas.views.nuevo_problema'),
 	url(r'^problema/detalle/(?P<id_problem>\d+)$','problemas.views.detalle_problema'),
+	url(r'^problema/editar/(?P<id_problem>\d+)$','problemas.views.modificar_problema'),
 	
 	url(r'^pago/$','pagos.views.pagos'),
 	url(r'^pago/nuevo$','pagos.views.nuevo_pago'),

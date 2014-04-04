@@ -10,7 +10,10 @@ from problemas.models import Problema
 from pagos.models import Historico
 
 
-from clientes.forms import NuevoCliente 
+from clientes.forms import NuevoCliente
+from clientes.forms import EditarCliente 
+
+
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
@@ -60,9 +63,9 @@ def modificar_cliente(request, username):
     p = get_object_or_404(Cliente, username = username)
 
     if request.method == 'POST':
-        form    = NuevoCliente(request.POST, request.FILES)
+        form    = EditarCliente(request.POST, request.FILES)
         if form.is_valid():
-            p.username  = form.cleaned_data['username']
+#            p.username  = form.cleaned_data['username']
             p.nombre    = form.cleaned_data['nombre']
             p.apellido  = form.cleaned_data['apellido']
 
@@ -79,8 +82,8 @@ def modificar_cliente(request, username):
             p.save()
             return HttpResponseRedirect('/cliente')
     if request.method == 'GET':
-        form = NuevoCliente(initial = {
-            'username'      : p.username,
+        form = EditarCliente(initial = {
+ #           'username'      : p.username,
             'nombre'        : p.nombre,
             'apellido'      : p.apellido,
 

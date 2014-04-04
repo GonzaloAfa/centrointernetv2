@@ -5,6 +5,12 @@
 
 {% load bootstrap %}
 
+
+<h1>{{problema.cliente.nombre}} {{problema.cliente.apellido}}</h1>
+
+<h3>{{problema.tipo_problema}} {{problema.datetime}}</h3>
+
+
 <form id='' method='POST' action='' enctype='multipart/form-data' class="form-horizontal" role="form"> 
 	{% csrf_token %}
 	{{form|bootstrap_horizontal}}

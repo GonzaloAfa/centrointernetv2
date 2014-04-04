@@ -6,6 +6,8 @@ from clientes.models import Cliente
 # Create your views here.
 
 from problemas.forms import NuevoProblema
+from problemas.forms import EditarProblema
+
 
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
@@ -50,6 +52,8 @@ def nuevo_problema(request):
         form = NuevoProblema()
     return render_to_response('problem/new.html',{'form':form}, context_instance=RequestContext(request))
 
+
+
 def detalle_problema(request, id_problem):
     problema         = get_object_or_404(Problema, id = id_problem)
     cliente          = get_object_or_404(Cliente, username=problema.cliente)
@@ -58,3 +62,28 @@ def detalle_problema(request, id_problem):
     return render_to_response('problem/detail.html', 
         {'problem': problema, 'client': cliente, 'list_problem': lista_problemas},
          context_instance=RequestContext(request))
+
+
+def modificar_problema(request, id_problem):
+    p         = get_object_or_404(Problema, id = id_problem)
+
+    if request.method=='POST':
+        form    = EditarProblema(request.POST, request.FILES)
+        if form.is_valid():
+
+            p.comentario    = form.cleaned_data['comentario']
+            p.status        = form.cleaned_data['status']
+            p.descuento     = form.cleaned_data['descuento']
+
+            p.save()
+            return HttpResponseRedirect('/problema')
+
+    if request.method == 'GET':
+        form    = EditarProblema(initial = { 
+            'comentario'    : p.comentario,
+            'status'        : p.status,
+            'descuento'     : p.descuento,
+            })
+
+    return render_to_response('problem/new.html',{'form':form, 'problema': p}, context_instance=RequestContext(request))
+
