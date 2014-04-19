@@ -39,7 +39,8 @@ urlpatterns = patterns('',
 	url(r'^facturar/$', 'facturacion.views.facturar'),
 	url(r'^facturar/generar_cobro$', 'facturacion.views.generar_cobro'),
 
-
+	url(r'^generarPdf/(?P<id>\d+)$', 'facturacion.views.generar_pdf'),
+	url(r'^enviarMail/(?P<id>\d+)$', 'facturacion.views.enviar_mail'),
 
     url(r'^admin/', include(admin.site.urls)),
 	url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
