@@ -113,3 +113,10 @@ MEDIA_URL = 'media/'
 
 STATIC_ROOT = os.path.join(SITE_ROOT, 'static_root', 'static')
 STATIC_URL = '/data/'
+
+# Configuraciones para enviar mails
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'testcentrointernet@gmail.com'
+EMAIL_HOST_PASSWORD = 'holamundo1313'
+EMAIL_PORT = 587

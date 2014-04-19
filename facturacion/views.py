@@ -4,14 +4,14 @@ from django.shortcuts import render
 
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
-from django.template import RequestContext
+from django.template import RequestContext, loader, Context
 
 from facturacion.models import Proceso
 from clientes.models import Cliente
 
 
 from facturacion.forms import NuevoProceso
-
+from facturacion.utils import saveHtmlToPdf, send_mail_to_client, PDF_HTTP_Response
 
 
 
@@ -51,4 +51,31 @@ def resumen(request, id):
 
 def boleta(request):
 	return render_to_response('facturacion/boleta.html', context_instance=RequestContext(request))
+
+def generar_pdf(request, id):
+	template = loader.get_template('facturacion/boleta.html')
+	context = RequestContext(request, {})
+	html = template.render(context)
+	filename = 'boleta.pdf'
+	return PDF_HTTP_Response(html, filename)
+
+
+def enviar_mail(request, id):
+	template = loader.get_template('facturacion/boleta.html')
+	context = RequestContext(request, {})
+	html = template.render(context)
+	
+	filename = 'facturacion/boletas/boleta.pdf'
+	email_cliente = 'testcentrointernet@gmail.com'
+	titulo = 'titulo'
+	content = 'contenido'
+
+	saveHtmlToPdf(html, filename)
+	send_mail_to_client(titulo, content, email_cliente, attachment=filename)
+	return HttpResponseRedirect('/resumen/1')
+    
+
+
+
+
 
