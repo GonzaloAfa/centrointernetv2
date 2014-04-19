@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+    <title>Boletas</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{STATIC_URL}}css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header">
+        <h3 class="text-muted">CentroInternet</h3>
+      </div>
+
+
+  <div class="container">
+    <div class="row">
+        <div class="col-xs-9">
+        <hr>
+        <div class="row">
+          <div class="col-xs-4">
+            <address>
+            <strong>Señor(a):</strong><br>
+              John Smith<br>
+              Pasaje 8, 01356<br>
+              Puente Alto, Chile
+            </address>
+          </div>
+          <div class="col-xs-4 text-center">
+            <address>
+              <strong>Centro Internet</strong><br>
+              +56 9 5113 3374<br>
+              consultas@centrointernet.cl<br>
+            </address>
+          </div>
+          <div class="col-xs-4 text-right">
+            <address>
+              <strong>Vencimiento</strong><br>
+              Abril 2014<br>
+              Periodo 1-30 Abril<br>              
+              Pagar hasta 22-Abril-2014<br>
+            </address>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><strong>Historico</strong></h3>
+          </div>
+          <div class="panel-body">
+            <div class="table-responsive">
+              <table class="table table-condensed">
+                <thead>
+                                <tr>
+                      <td><strong>Fecha</strong></td>
+                      <td class="text-center"><strong>Detalle</strong></td>
+                      <td class="text-center"><strong>Medio Pago</strong></td>
+                      <td class="text-right"><strong>Monto</strong></td>
+                                </tr>
+                </thead>
+                <tbody>
+                  <!-- foreach ($order->lineItems as $line) or some such thing here -->
+                  <tr>
+                    <td>16/04/2014</td>
+                    <td class="text-center">Mes Abril</td>
+                    <td class="text-center">Servipag</td>
+                    <td class="text-right">$10.99</td>
+                  </tr>
+                                <tr>
+                  <td>16/04/2014</td>
+                    <td class="text-center">Mes Diciembre</td>
+                    <td class="text-center">Transferencia</td>
+                    <td class="text-right">$60.00</td>
+                  </tr>
+                                <tr>
+                  <td>16/04/2014</td>
+                    <td class="text-center">Descuento</td>
+                    <td class="text-center">-</td>
+                    <td class="text-right">$600.00</td>
+                  </tr>
+                   <td>16/04/2014</td>
+                    <td class="text-center">Descuento</td>
+                    <td class="text-center">-</td>
+                    <td class="text-right">$600.00</td>
+                  </tr>
+                     <td>16/04/2014</td>
+                    <td class="text-center">Descuento</td>
+                    <td class="text-center">-</td>
+                    <td class="text-right">$600.00</td>
+                  </tr>
+                     <td>16/04/2014</td>
+                    <td class="text-center">Descuento</td>
+                    <td class="text-center">-</td>
+                    <td class="text-right">$600.00</td>
+                  </tr>
+                     <td>16/04/2014</td>
+                    <td class="text-center">Descuento</td>
+                    <td class="text-center">-</td>
+                    <td class="text-right">$600.00</td>
+                  </tr>
+                  <tr>
+                    <td class="no-line"></td>
+                    <td class="no-line"></td>
+                    <td class="no-line text-center"><h3><strong>Total</strong></h3></td>
+                    <td class="no-line text-right"><h3><strong>$685.99</strong></h3></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-3">
+      <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><strong>Resumen</strong></h3>
+          </div>
+          <div class="panel-body">
+            <div class="table-responsive">
+              <table class="table table-condensed">
+                <tbody>
+                  <!-- foreach ($order->lineItems as $line) or some such thing here -->
+                  <tr>
+                    <td>Saldo anterior</td>
+                    <td class="text-right">$10.99</td>
+                  </tr>
+                                <tr>
+                    <td>Pagos recibidos</td>
+                    <td class="text-right">$60.00</td>
+                  </tr>
+                  <tr>
+                    <td>Total del mes</td>
+                    <td class="text-right">$600.00</td>
+                  </tr>
+                
+                  <tr>
+                    <td><strong>Total a pagar</strong></td>
+                    <td class="text-right"><strong>$685.99</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+
+
+      </div>
+
+    </div>
+</div>
+
+
+
+      <div class="footer">
+        <p>&copy; CentroInternet 2014</p>
+      </div>
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  </body>
+</html>

@@ -41,10 +41,11 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'bootstrapform',
     'centrointernet',
-    'cupones',
+    'facturacion',
     'problemas',
     'clientes',
     'pagos',
+    'bootstrap3_datetime',
 )
 
 MIDDLEWARE_CLASSES = (

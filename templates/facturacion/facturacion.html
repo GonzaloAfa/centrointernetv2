@@ -1,0 +1,20 @@
+{% extends "sign-in.html" %}
+
+{% block title %}Facturacion - CentroInternet{% endblock %}
+
+{% block breadcrumb %}
+<li><a href="/cupones">Facturacion</a></li>
+{% block breadcrumb-facturacion %}
+{% endblock %}
+{% endblock %}
+
+{% block coupon %} 
+class='active'
+{% endblock%}
+
+
+{% block link-sidebar %}  
+ 	<a href="/proceso" class="list-group-item">Proceso</a>
+ 	<a href="/proceso/nuevo" class="list-group-item">Nuevo Proceso</a>
+
+{% endblock %}
