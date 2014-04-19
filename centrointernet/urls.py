@@ -36,7 +36,9 @@ urlpatterns = patterns('',
 	url(r'^proceso/nuevo$', 'facturacion.views.nuevo_proceso'),	
 	url(r'^resumen/(?P<id>\d+)$', 'facturacion.views.resumen'),
 	url(r'^boleta/$', 'facturacion.views.boleta'),
-	url(r'^facturar/$', 'facturacion.views.mensualidad'),
+	url(r'^facturar/$', 'facturacion.views.facturar'),
+	url(r'^facturar/generar_cobro$', 'facturacion.views.generar_cobro'),
+
 
 
     url(r'^admin/', include(admin.site.urls)),
