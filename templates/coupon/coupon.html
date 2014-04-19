@@ -1,0 +1,20 @@
+{% extends "sign-in.html" %}
+
+{% block title %}Cupones - CentroInternet{% endblock %}
+
+{% block breadcrumb %}
+<li><a href="/cupones">Cupones</a></li>
+{% block breadcrumb-coupon %}
+{% endblock %}
+{% endblock %}
+
+{% block coupon %} 
+class='active'
+{% endblock%}
+
+
+{% block link-sidebar %}  
+ 	<a href="/proceso" class="list-group-item">Proceso</a>
+ 	<a href="/proceso/nuevo" class="list-group-item">Nuevo Proceso</a>
+
+{% endblock %}

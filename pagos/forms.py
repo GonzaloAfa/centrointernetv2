@@ -9,4 +9,5 @@ class NuevoPago(ModelForm):
 	class Meta:
 		model 	= Historico
 		exclude	= ('descripcion',)
-#Falta agregar 'tipo_historico'. pero necesito que funcione el choises de tipo_historico
+
+#	tipo_historico = forms.CharField(widget=forms.HiddenInput)

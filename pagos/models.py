@@ -2,23 +2,32 @@ from django.db import models
 from clientes.models import Cliente
 # Create your models here.
 
+PAGO = 1
+COBRO = 2
+DESCUENTO = 3
+
+TIPO_HISTORICO = (	
+		('Pago', 'Pago'),
+		('Cobro', 'Cobro'),
+		('Descuento', 'Descuento'),
+		)
+
+METODO_PAGO = (
+	('Servipag', 'Servipag'),
+	('Transferencia', 'Transferencia'),
+	('Sucursal', 'Sucursal'),
+	)
+
+
+
 class MetodoPago(models.Model):
-	metodo_pago 	= models.CharField(max_length=20)
+	metodo_pago 	= models.CharField(max_length=20, choices=METODO_PAGO)
 
 	def __unicode__(self):
 		return self.metodo_pago
 
-# los tipos son Pago | Cargo
 class TipoHistorico(models.Model):
-	
-	TIPO_HISTORICO = (	
-		('1', 'Pago'),
-		('2', 'Cobro'),
-		('3', 'Descuento'),
-		)
-
-#	tipo_historico	= models.CharField(max_length=1, choices=TIPO_HISTORICO)
-	tipo_historico	= models.CharField(max_length=20)
+	tipo_historico	= models.CharField(max_length=20, choices=TIPO_HISTORICO)
 
 	def __unicode__(self):
 		return self.tipo_historico

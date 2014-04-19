@@ -1,5 +1,14 @@
 from django.db import models
 
+
+CLIENTE_STATUS = (
+	('Activo','Activo'),
+	('Moroso','Moroso'),
+	('Cortado','Cortado'),
+	('Anulado','Anulado'),
+
+	)
+
 # Create your models here.
 class Servicio(models.Model):
 
@@ -11,7 +20,7 @@ class Servicio(models.Model):
 		return self.plan
 
 class ClienteStatus(models.Model):
-	status 			= models.CharField(max_length=20)
+	status 			= models.CharField(max_length=20, choices=CLIENTE_STATUS)
 	def __unicode__(self):
 		return self.status
 

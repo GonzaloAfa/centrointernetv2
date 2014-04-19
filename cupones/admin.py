@@ -1,3 +1,6 @@
+#encoding:utf-8
 from django.contrib import admin
 
-# Register your models here.
+from cupones.models import Proceso
+
+admin.site.register(Proceso)

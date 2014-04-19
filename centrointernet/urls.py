@@ -31,6 +31,14 @@ urlpatterns = patterns('',
 	url(r'^pago/nuevo$','pagos.views.nuevo_pago'),
 	url(r'^pago/page/(?P<page>\d+)$','pagos.views.lista_pagos'),
 	
+
+	url(r'^proceso/$', 'cupones.views.proceso'),
+	url(r'^proceso/nuevo$', 'cupones.views.nuevo_proceso'),	
+	url(r'^resumen/$', 'cupones.views.resumen'),
+	url(r'^boleta/$', 'cupones.views.boleta'),
+	url(r'^mensualidad/$', 'cupones.views.mensualidad'),
+
+
     url(r'^admin/', include(admin.site.urls)),
 	url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 	url(r'^media/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.MEDIA_ROOT}),
