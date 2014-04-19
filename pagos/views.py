@@ -25,7 +25,7 @@ def pagos(request):
 
 
 def lista_pagos(request, page):
-    listapagos = Historico.objects.filter(tipo_historico = PAGO ).order_by('datetime').reverse()
+    listapagos = Historico.objects.filter( tipo_historico = PAGO ).order_by('datetime').reverse()
     paginator = Paginator(listapagos,3)
     try:
         pages = int(page)
@@ -38,16 +38,16 @@ def lista_pagos(request, page):
     except (InvalidPage):
         listapagos = paginator.page(paginator.num_pages)
 
-    return render_to_response('pay/list.html',{'list':pagos}, context_instance=RequestContext(request))
+    return render_to_response('pay/list.html',{'list':listapagos}, context_instance=RequestContext(request))
 
 
 def nuevo_pago(request):
     if request.method=='POST':
-        form = NuevoPago(request.POST, request.FILES, initial={'tipo_historico' : 'Pago'},)
+        form = NuevoPago(request.POST, request.FILES, initial={'tipo_historico' : PAGO},)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/pago')
     else:
-        form = NuevoPago()
+        form = NuevoPago(initial={'tipo_historico' : PAGO})
     return render_to_response('pay/new.html',{'form':form}, context_instance=RequestContext(request))
 

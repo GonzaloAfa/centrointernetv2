@@ -27,7 +27,7 @@ def problemas(request):
 
 
 def lista_problemas(request, page):
-    listaproblemas = Problema.objects.all().order_by('datetime').reverse()
+    listaproblemas = Problema.objects.filter( tipo_historico = 'Pago').order_by('datetime').reverse()
     paginator = Paginator(listaproblemas,3)
     try:
         pages = int(page)

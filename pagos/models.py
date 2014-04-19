@@ -2,14 +2,14 @@ from django.db import models
 from clientes.models import Cliente
 # Create your models here.
 
-PAGO = 1
-COBRO = 2
-DESCUENTO = 3
+PAGO = 'Pago'
+COBRO = 'Cobro'
+DESCUENTO = 'Descuento'
 
 TIPO_HISTORICO = (	
-		('Pago', 'Pago'),
-		('Cobro', 'Cobro'),
-		('Descuento', 'Descuento'),
+		(PAGO, 'Pago'),
+		(COBRO, 'Cobro'),
+		(DESCUENTO, 'Descuento'),
 		)
 
 METODO_PAGO = (
@@ -26,11 +26,11 @@ class MetodoPago(models.Model):
 	def __unicode__(self):
 		return self.metodo_pago
 
-class TipoHistorico(models.Model):
-	tipo_historico	= models.CharField(max_length=20, choices=TIPO_HISTORICO)
+#class TipoHistorico(models.Model):
+#	tipo_historico	= models.CharField(max_length=20, choices=TIPO_HISTORICO)
 
-	def __unicode__(self):
-		return self.tipo_historico
+#	def __unicode__(self):
+#		return self.tipo_historico
 
 
 
@@ -40,5 +40,5 @@ class Historico(models.Model):
 	cantidad 		= models.IntegerField()
 	descripcion		= models.CharField(max_length=30, blank=True)
 	metodo_pago 	= models.ForeignKey(MetodoPago)
-	tipo_historico	= models.ForeignKey(TipoHistorico)
+	tipo_historico	= models.CharField(max_length=20, choices=TIPO_HISTORICO)
 
