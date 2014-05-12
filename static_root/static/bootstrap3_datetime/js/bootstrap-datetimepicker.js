@@ -26,6 +26,7 @@
  * =========================================================
  */
 ; (function (factory) {
+        
     if (typeof define === 'function' && define.amd) {
     // AMD is used - Register as an anonymous module.
         define(['jquery', 'moment'], factory);
@@ -1079,11 +1080,11 @@
 
         init();
     };
-
     $.fn.datetimepicker = function (options) {
         return this.each(function () {
             var $this = $(this), data = $this.data('DateTimePicker');
             if (!data) $this.data('DateTimePicker', new DateTimePicker(this, options));
         });
     };
+
 }));

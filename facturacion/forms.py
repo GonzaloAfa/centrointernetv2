@@ -12,4 +12,10 @@ class NuevoProceso (ModelForm):
 		model = Proceso
 
 	periodo_inicio = forms.DateField( widget=DateTimePicker(
+		options={"format": "YYYY-MM-DD", "pickSeconds": False}))
+
+	periodo_termino = forms.DateField( widget=DateTimePicker(
+		options={"format": "YYYY-MM-DD", "pickSeconds": False}))	
+
+	fecha_corte = forms.DateField( widget=DateTimePicker(
 		options={"format": "YYYY-MM-DD", "pickSeconds": False}))	
