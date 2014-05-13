@@ -32,15 +32,20 @@ urlpatterns = patterns('',
 	url(r'^pago/page/(?P<page>\d+)$','pagos.views.lista_pagos'),
 	
 
-	url(r'^facturar/$', 'facturacion.views.lista_procesos'),
-	url(r'^facturar/nuevo$', 'facturacion.views.nuevo_proceso'),	
-	url(r'^resumen/(?P<id>\d+)$', 'facturacion.views.resumen'),
-	url(r'^boleta/$', 'facturacion.views.boleta'),
-	url(r'^facturar/$', 'facturacion.views.facturar'),
-	url(r'^facturar/generar_cobro$', 'facturacion.views.generar_cobro'),
 
-	url(r'^generarPdf/(?P<id>\d+)$', 'facturacion.views.generar_pdf'),
-	url(r'^enviarMail/(?P<id>\d+)$', 'facturacion.views.enviar_mail'),
+	url(r'^facturar/$', 'facturacion.views.lista_procesos'),
+
+	url(r'^facturar/proceso/nuevo$', 'facturacion.views.nuevo_proceso'),	
+	url(r'^facturar/proceso/usuarios$', 'facturacion.views.listado_usuarios'),
+	url(r'^facturar/proceso/cobros$', 'facturacion.views.generar_cobro'),
+	url(r'^facturar/proceso/resumen/(?P<id>\d+)$', 'facturacion.views.resumen'),
+
+	url(r'^facturar/PDF/descargar/(?P<id>\d+)$', 'facturacion.views.generar_pdf'),
+	url(r'^facturar/email/enviar/(?P<id>\d+)$', 'facturacion.views.enviar_mail'),
+
+	url(r'^facturar/boleta/ver/(?P<username>\w+)$', 'facturacion.views.boleta'),
+
+
 
     url(r'^admin/', include(admin.site.urls)),
 	url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
