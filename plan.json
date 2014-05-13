@@ -1,0 +1,13 @@
+[
+
+{
+  "pk": 1, 
+  "model": "clientes.servicio", 
+  "fields": {
+    "precio": 8000, 
+    "plan": "The Planest", 
+    "detalle": "DETALLE DEL PLAN"
+  }
+}
+
+]
