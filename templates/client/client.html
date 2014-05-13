@@ -13,7 +13,8 @@ class='active'
 {% endblock%}
 
 
-{% block link-sidebar %}  
- 	<a href="/cliente" {% block clientlist %}class="list-group-item"{% endblock %}>Listado</a>
-    <a href="/cliente/nuevo" {% block clientnew %}class="list-group-item"{% endblock %}>Agregar</a>
+{% block link-sidebar %}
+	<a href="/cliente" class="list-group-item active">Clientes</a>
+ 	<a href="/cliente" class="list-group-item">Listado</a>
+    <a href="/cliente/nuevo" class="list-group-item" >Agregar</a>
 {% endblock %}

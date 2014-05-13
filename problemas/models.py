@@ -9,16 +9,17 @@ ESTADO_PROBLEMA = (
 	('Solucionado','Solucionado'),
 	)
 
+TIPO_PROBLEMA = (
+	('No funciona Internet','No funciona Internet'),
+	('DNS','DNS'),
+	('Mucho lag','Mucho Lag'),
+	('Internet cortado','Internet Cortado'),
+	)
 
-# Create your models here.
-class TipoProblema(models.Model):
-	tipo_problema	= models.CharField(max_length=20)
-	def __unicode__(self):
-		return self.tipo_problema
 
 class Problema (models.Model):
 	cliente 		= models.ForeignKey(Cliente)
-	tipo_problema 	= models.ForeignKey(TipoProblema)
+	tipo_problema 	= models.CharField(max_length=20, choices=TIPO_PROBLEMA)
 	comentario 		= models.TextField(blank=False)
 	datetime 		= models.DateTimeField(auto_now=True)
 	status 			= models.CharField(max_length=20, choices=ESTADO_PROBLEMA)

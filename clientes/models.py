@@ -9,9 +9,12 @@ CLIENTE_STATUS = (
 
 	)
 
+RED = (
+	('Z7','Z7.CentroInternet'),
+	)
+
 # Create your models here.
 class Servicio(models.Model):
-
 	plan			= models.CharField(max_length=20)
 	detalle			= models.TextField()
 	precio			= models.IntegerField()
@@ -19,11 +22,6 @@ class Servicio(models.Model):
 	def __unicode__(self):
 		return self.plan
 
-
-class Red(models.Model):
-	red 		= models.CharField(max_length=20)
-	def __unicode__(self):
-		return self.red
 
 
 class Cliente(models.Model):
@@ -37,10 +35,10 @@ class Cliente(models.Model):
 
 	servicio 		= models.ForeignKey(Servicio)
 	status 			= models.CharField(max_length=20, choices=CLIENTE_STATUS)
-	red 			= models.ForeignKey(Red)
+	red 			= models.CharField(max_length=20, choices=RED)
 
 	email			= models.EmailField()
-	celular			= models.CharField(max_length=20, help_text="Ejemplo: +56 9 xxxx xxxx")
+	celular			= models.CharField(max_length=15, help_text="Ejemplo: +56 9 xxxx xxxx")
 
 	date_start		= models.DateTimeField(auto_now=True)
 
