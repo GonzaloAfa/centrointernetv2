@@ -49,7 +49,7 @@ def resumen(request, id):
 	return render_to_response('facturacion/resumen.html', context_instance=RequestContext(request))
 
 
-def boleta(request):
+def boleta(request, username):
 	return render_to_response('facturacion/boleta.html', context_instance=RequestContext(request))
 
 def generar_pdf(request, id):

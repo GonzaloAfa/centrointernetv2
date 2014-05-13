@@ -9,13 +9,20 @@
     	<dt>Nombre</dt>
 		<dd>{{cliente.nombre|capfirst}} {{cliente.apellido|capfirst}} </dd>
 
+    	<dt>Rut</dt>
+		<dd>{{cliente.rut|capfirst}}</dd>
+
 		<dt>Estado</dt>
-		<dd><span class="label label-success">{{cliente.status}}</span></dd>
-	<!--	
-		<dd><span class="label label-warning">Moroso</span></dd>
-		<dd><span class="label label-danger">Cortado</span></dd>
-		<dd><span class="label label-default">Nulidad</span></dd>
-    -->
+		
+		{% if cliente.status == "Activo" %}
+			<dd><span class="label label-success">Activo</span></dd>
+		{% elif cliente.status == "Moroso"%}
+			<dd><span class="label label-warning">Moroso</span></dd>
+		{% elif cliente.status == "Cortado"  %}
+			<dd><span class="label label-danger">Cortado</span></dd>
+		{% elif cliente.status == "Nulidad"  %}
+			<dd><span class="label label-default">Nulidad</span></dd>
+		{% endif%}
 
 
         <dt>Dirección</dt>
