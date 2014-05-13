@@ -36,7 +36,7 @@ class Cliente(models.Model):
 	direccion		= models.TextField()
 
 	servicio 		= models.ForeignKey(Servicio)
-	status 			= models.CharField(max_length=20, choices=CLIENTE_STATUS)
+	status 			= models.CharField(max_length=20, choices=CLIENTE_STATUS, default='Activo')
 	red 			= models.ForeignKey(Red)
 
 	email			= models.EmailField()

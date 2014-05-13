@@ -8,6 +8,7 @@ from clientes.models import Cliente
 class NuevoCliente(ModelForm):
 	class Meta:
 		model = Cliente
+		exclude = ('status',)
 
 class EditarCliente(ModelForm):
 	class Meta:
