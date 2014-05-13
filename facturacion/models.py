@@ -41,7 +41,7 @@ class Proceso(models.Model):
 	periodo_termino		= models.CharField(max_length=20)
 	fecha_corte			= models.CharField(max_length=20)
 	fecha_facturacion 	= models.DateTimeField(auto_now=True)
-	status 				= models.CharField(max_length=20,choices=TIPO_STATUS)
+	status 				= models.CharField(max_length=20,choices=TIPO_STATUS, default='Inicio')
 
 	def __unicode__(self):
 		return self.ano + " "+ self.mes

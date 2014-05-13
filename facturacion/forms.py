@@ -10,7 +10,7 @@ from facturacion.models import Proceso
 class NuevoProceso (ModelForm):
 	class Meta:
 		model = Proceso
-
+		exclude = ('status',)
 	periodo_inicio = forms.DateField( widget=DateTimePicker(
 		options={"format": "YYYY-MM-DD", "pickSeconds": False}))
 
