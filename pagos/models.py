@@ -19,26 +19,11 @@ METODO_PAGO = (
 	)
 
 
-
-class MetodoPago(models.Model):
-	metodo_pago 	= models.CharField(max_length=20, choices=METODO_PAGO)
-
-	def __unicode__(self):
-		return self.metodo_pago
-
-#class TipoHistorico(models.Model):
-#	tipo_historico	= models.CharField(max_length=20, choices=TIPO_HISTORICO)
-
-#	def __unicode__(self):
-#		return self.tipo_historico
-
-
-
 class Historico(models.Model):
 	cliente 		= models.ForeignKey(Cliente)
 	datetime 		= models.DateTimeField(auto_now=True)
 	cantidad 		= models.IntegerField()
 	descripcion		= models.CharField(max_length=30, blank=True)
-	metodo_pago 	= models.ForeignKey(MetodoPago)
+	metodo_pago 	=  models.CharField(max_length=20, choices=METODO_PAGO)
 	tipo_historico	= models.CharField(max_length=20, choices=TIPO_HISTORICO)
 
