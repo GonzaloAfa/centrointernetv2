@@ -32,8 +32,8 @@ urlpatterns = patterns('',
 	url(r'^pago/page/(?P<page>\d+)$','pagos.views.lista_pagos'),
 	
 
-	url(r'^proceso/$', 'facturacion.views.lista_procesos'),
-	url(r'^proceso/nuevo$', 'facturacion.views.nuevo_proceso'),	
+	url(r'^facturar/$', 'facturacion.views.lista_procesos'),
+	url(r'^facturar/nuevo$', 'facturacion.views.nuevo_proceso'),	
 	url(r'^resumen/(?P<id>\d+)$', 'facturacion.views.resumen'),
 	url(r'^boleta/$', 'facturacion.views.boleta'),
 	url(r'^facturar/$', 'facturacion.views.facturar'),

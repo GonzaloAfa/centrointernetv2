@@ -3,7 +3,6 @@ from django.shortcuts import render
 
 from clientes.models import Red
 from clientes.models import Servicio
-from clientes.models import ClienteStatus
 from clientes.models import Cliente
 
 from problemas.models import Problema

@@ -19,10 +19,6 @@ class Servicio(models.Model):
 	def __unicode__(self):
 		return self.plan
 
-class ClienteStatus(models.Model):
-	status 			= models.CharField(max_length=20, choices=CLIENTE_STATUS)
-	def __unicode__(self):
-		return self.status
 
 class Red(models.Model):
 	red 		= models.CharField(max_length=20)
@@ -32,7 +28,7 @@ class Red(models.Model):
 
 class Cliente(models.Model):
 
-	username		= models.CharField(max_length=20)
+	username		= models.CharField(max_length=20, unique=True)
 	nombre 			= models.CharField(max_length=20)
 	apellido		= models.CharField(max_length=30)
 
