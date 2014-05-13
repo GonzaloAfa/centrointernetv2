@@ -40,7 +40,7 @@ class Cliente(models.Model):
 	direccion		= models.TextField()
 
 	servicio 		= models.ForeignKey(Servicio)
-	status 			= models.ForeignKey(ClienteStatus)
+	status 			= models.CharField(max_length=20, choices=CLIENTE_STATUS)
 	red 			= models.ForeignKey(Red)
 
 	email			= models.EmailField()
