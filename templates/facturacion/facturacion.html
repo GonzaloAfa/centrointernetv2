@@ -19,3 +19,36 @@ class='active'
  	<a href="/facturar/proceso/nuevo" class="list-group-item">Nuevo Proceso</a>
 
 {% endblock %}
+
+
+{%  block context-header %}
+<div class="stepwizard">
+    <div class="stepwizard-row">
+        <div class="stepwizard-step">
+            <button type="button" class="btn btn-default btn-circle" disabled="disabled">1</button>
+            <p>Iniciar proceso</p>
+        </div>
+        <div class="stepwizard-step">
+            <button type="button" class="btn btn-default btn-circle" disabled="disabled">2</button>
+            <p>Cambiar plan</p>
+        </div>
+        <div class="stepwizard-step">
+            <button type="button" class="btn btn-default btn-circle" disabled="disabled">3</button>
+            <p>Costo mensual</p>
+        </div> 
+        <div class="stepwizard-step">
+            <button type="button" class="btn btn-default btn-circle" disabled="disabled">4</button>
+            <p>Descuentos/Cobros</p>
+        </div> 
+        <div class="stepwizard-step">
+            <button type="button" class="btn btn-default btn-circle" disabled="disabled">5</button>
+            <p>Generar PDF</p>
+        </div> 
+        <div class="stepwizard-step">
+            <button type="button" class="btn btn-default btn-circle" disabled="disabled">6</button>
+            <p>Enviar Email</p>
+        </div> 
+    </div>
+</div>
+<br/>
+{% endblock %}

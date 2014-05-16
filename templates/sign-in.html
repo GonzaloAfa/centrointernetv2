@@ -14,6 +14,8 @@
     
     <!-- Bootstrap core CSS -->
     <link href="{{STATIC_URL}}css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{STATIC_URL}}css/steps.css" rel="stylesheet">
+
     <script src="{{STATIC_URL}}js/jquery.min.js"></script>
     <script src="{{STATIC_URL}}js/bootstrap.min.js"></script>
 
@@ -99,6 +101,9 @@
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
           </p>
 
+          {%  block context-header %}
+          {% endblock %}  
+        
           {% block context %}
             <h2>Inserte el "block context" acá</h2>  
           {% endblock %}  

@@ -13,6 +13,8 @@ from clientes.models import Cliente
 from facturacion.forms import NuevoProceso
 from facturacion.utils import saveHtmlToPdf, send_mail_to_client, PDF_HTTP_Response
 
+#usar name url para redireccionar
+from django.core.urlresolvers import reverse
 
 
 def lista_procesos(request):
@@ -24,33 +26,31 @@ def nuevo_proceso(request):
 		form = NuevoProceso(request.POST, initial={'status': 'Inicio'})
 		if form.is_valid():
 			form.save()
-			return HttpResponseRedirect('/facturar')
+			return HttpResponseRedirect(reverse('listado_clientes'))
 	else:
 		form = NuevoProceso(initial={'status': 'Inicio'})
 
 	return render_to_response('facturacion/nuevo_proceso.html',{'form':form}, context_instance=RequestContext(request))
 
 
-def facturar(request):
-	lista_clientes = Cliente.objects.all()
-	return render_to_response('facturacion/facturar.html', {'list': lista_clientes}, context_instance=RequestContext(request))
+def listado_clientes(request):
+	return render_to_response('facturacion/listado_clientes.html', context_instance=RequestContext(request))
 
 
-def cambiar_plan(request,username):
-	return HttpResponseRedirect('/facturar')
+def generar_cobros(request):
+	return HttpResponseRedirect(reverse('resumen'))
+
+
+def listado_resumen(request):	
+	return render_to_response('facturacion/listado_resumen.html', context_instance=RequestContext(request))
 
 
 
-def generar_cobro(request):
-	return HttpResponseRedirect('/resumen')
+
+def generar_pdfs(request):
+	return render_to_response('facturacion/facturar.html', context_instance=RequestContext(request))
 
 
-def resumen(request, id):	
-	return render_to_response('facturacion/resumen.html', context_instance=RequestContext(request))
-
-
-def boleta(request, username):
-	return render_to_response('facturacion/boleta.html', context_instance=RequestContext(request))
 
 def generar_pdf(request, id):
 	template = loader.get_template('facturacion/boleta.html')
@@ -58,7 +58,6 @@ def generar_pdf(request, id):
 	html = template.render(context)
 	filename = 'boleta.pdf'
 	return PDF_HTTP_Response(html, filename)
-
 
 def enviar_mail(request, id):
 	template = loader.get_template('facturacion/boleta.html')
@@ -74,8 +73,6 @@ def enviar_mail(request, id):
 	send_mail_to_client(titulo, content, email_cliente, attachment=filename)
 	return HttpResponseRedirect('/resumen/1')
     
-
-
-
-
+def boleta(request, username):
+	return render_to_response('facturacion/boleta.html', context_instance=RequestContext(request))
 

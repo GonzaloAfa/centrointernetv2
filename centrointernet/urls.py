@@ -34,13 +34,16 @@ urlpatterns = patterns('',
 
 
 	url(r'^facturar/$', 'facturacion.views.lista_procesos'),
+	url(r'^facturar/proceso/nuevo$', 'facturacion.views.nuevo_proceso', name='inicio'),	
+	url(r'^facturar/proceso/clientes$', 'facturacion.views.listado_clientes', name='listado_clientes'),
+	url(r'^facturar/proceso/generar/cobros$', 'facturacion.views.generar_cobros', name='generar_cobros'),
+	url(r'^facturar/proceso/resumen/$', 'facturacion.views.listado_resumen', name='resumen'),
 
-	url(r'^facturar/proceso/nuevo$', 'facturacion.views.nuevo_proceso'),	
-	url(r'^facturar/proceso/usuarios$', 'facturacion.views.listado_usuarios'),
-	url(r'^facturar/proceso/cobros$', 'facturacion.views.generar_cobro'),
-	url(r'^facturar/proceso/resumen/(?P<id>\d+)$', 'facturacion.views.resumen'),
 
-	url(r'^facturar/PDF/descargar/(?P<id>\d+)$', 'facturacion.views.generar_pdf'),
+
+	url(r'^facturar/proceso/generar/PDFs/(?P<id>\d+)$', 'facturacion.views.generar_pdf', name='generar_pdfs'),
+
+	url(r'^facturar/PDF/descargar/(?P<id>\d+)$', 'facturacion.views.generar_pdf', name='generar_pdf'),
 	url(r'^facturar/email/enviar/(?P<id>\d+)$', 'facturacion.views.enviar_mail'),
 
 	url(r'^facturar/boleta/ver/(?P<username>\w+)$', 'facturacion.views.boleta'),
