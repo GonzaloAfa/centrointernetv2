@@ -8,5 +8,5 @@ from pagos.models import Historico
 class NuevoPago(ModelForm):
 	class Meta:
 		model 	= Historico
-		exclude	= ('descripcion','tipo_historico')
-#		tipo_historico = forms.CharField(widget=forms.HiddenInput)
+		exclude	= ('descripcion',)
+	tipo_historico = forms.CharField(widget=forms.HiddenInput())
