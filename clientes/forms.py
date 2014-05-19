@@ -19,9 +19,6 @@ class NuevoCliente(ModelForm):
 		raise forms.ValidationError(
 			                "Rut no es valido"
 			            )
-		
-		
-
 
 
 class EditarCliente(ModelForm):

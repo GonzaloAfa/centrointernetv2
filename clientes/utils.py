@@ -2,6 +2,8 @@ from itertools import cycle
 
 def validar_rut(rut):
 	rut = limpiar_rut(rut)
+	if rut.find("-") == -1:
+		return False
 	split_rut = rut.split("-")
 	if digito_verificador(split_rut[0]) == split_rut[1]:
 		return True
