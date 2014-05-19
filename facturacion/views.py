@@ -44,6 +44,11 @@ def listado_clientes(request):
 
 
 def generar_cobros(request):
+	lista_clientes = Cliente.objects.filter(status='Activo' or 'Moroso').order_by('username')
+	for cliente in lista_clientes:
+		# generamos el cobro mensual
+		cobro = Historico(cliente=cliente, cantidad=cliente.servicio.precio, descripcion='Cobro automatico', metodo_pago='Sucursal', tipo_historico=COBRO)
+		cobro.save()
 	return HttpResponseRedirect(reverse('resumen'))
 
 
