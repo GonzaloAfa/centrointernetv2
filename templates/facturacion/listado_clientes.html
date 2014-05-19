@@ -22,7 +22,7 @@
           </tr>
          </thead>
         <tbody>
-        <tr>
+<!--         <tr>
 			
 			<td><a href='/perfil/#'>Dllanten</a></td>
 			<td>Activo</td>
@@ -34,14 +34,29 @@
 				</a>
 
 			</td>
-		</tr>
+		</tr> -->
 
 		{% for element in list %}
 		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
+			<td><a href='/perfil/{{element.username}}'>{{element.username|capfirst}}</a></td>
+			<td>
+				{% if element.status == "Activo" %}
+				<dd><span class="label label-success">Activo</span></dd>
+				{% elif element.status == "Moroso"%}
+					<dd><span class="label label-warning">Moroso</span></dd>
+				{% elif element.status == "Cortado"  %}
+					<dd><span class="label label-danger">Cortado</span></dd>
+				{% elif element.status == "Nulidad"  %}
+					<dd><span class="label label-default">Nulidad</span></dd>
+				{% endif%}
+			</td>
+			<td>{{element.servicio|capfirst}}<!-- ({{element.servicio.precio}}) --></td>
+			<td class="text-right">
+				<a href="/perfil/editar/{{element.username}}" class="btn btn-success btn-xs">
+					<span class="glyphicon glyphicon-edit"></span> Cambiar
+				</a>
 
+			</td>
 		</tr>
 		{% endfor %}
         </tbody>

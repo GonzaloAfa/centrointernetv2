@@ -8,7 +8,12 @@ from django.template import RequestContext, loader, Context
 
 from facturacion.models import Proceso
 from clientes.models import Cliente
+from pagos.models import PAGO, COBRO, DESCUENTO
+from pagos.models import Historico
 
+from django.core.paginator import Paginator
+from django.core.paginator import EmptyPage
+from django.core.paginator import InvalidPage
 
 from facturacion.forms import NuevoProceso
 from facturacion.utils import saveHtmlToPdf, send_mail_to_client, PDF_HTTP_Response
@@ -34,22 +39,20 @@ def nuevo_proceso(request):
 
 
 def listado_clientes(request):
-	return render_to_response('facturacion/listado_clientes.html', context_instance=RequestContext(request))
+	lista_clientes = Cliente.objects.filter(status='Activo' or 'Moroso').order_by('username')
+	return render_to_response('facturacion/listado_clientes.html',{'list':lista_clientes}, context_instance=RequestContext(request))
 
 
 def generar_cobros(request):
 	return HttpResponseRedirect(reverse('resumen'))
 
 
-def listado_resumen(request):	
+def listado_resumen(request):
 	return render_to_response('facturacion/listado_resumen.html', context_instance=RequestContext(request))
-
-
 
 
 def generar_pdfs(request):
 	return render_to_response('facturacion/facturar.html', context_instance=RequestContext(request))
-
 
 
 def generar_pdf(request, id):
@@ -58,6 +61,7 @@ def generar_pdf(request, id):
 	html = template.render(context)
 	filename = 'boleta.pdf'
 	return PDF_HTTP_Response(html, filename)
+
 
 def enviar_mail(request, id):
 	template = loader.get_template('facturacion/boleta.html')
@@ -72,6 +76,7 @@ def enviar_mail(request, id):
 	saveHtmlToPdf(html, filename)
 	send_mail_to_client(titulo, content, email_cliente, attachment=filename)
 	return HttpResponseRedirect('/resumen/1')
+
     
 def boleta(request, username):
 	return render_to_response('facturacion/boleta.html', context_instance=RequestContext(request))
