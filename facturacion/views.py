@@ -53,7 +53,19 @@ def generar_cobros(request):
 
 
 def listado_resumen(request):
-	return render_to_response('facturacion/listado_resumen.html', context_instance=RequestContext(request))
+	lista_clientes = Cliente.objects.filter(status='Activo' or 'Moroso').order_by('username')
+	for cliente in lista_clientes:
+		lista_pagos = Historico.objects.filter(cliente=cliente)
+		total = 0
+		for pago in lista_pagos:
+			if pago.tipo_historico == PAGO:
+				total -= pago.cantidad
+			elif pago.tipo_historico == COBRO:
+				total += pago.cantidad
+			elif pago.tipo_historico == DESCUENTO:
+				total -= pago.cantidad
+		cliente.total = total
+	return render_to_response('facturacion/listado_resumen.html', {'list':lista_clientes}, context_instance=RequestContext(request))
 
 
 def generar_pdfs(request):

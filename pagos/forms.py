@@ -10,3 +10,17 @@ class NuevoPago(ModelForm):
 		model 	= Historico
 		exclude	= ('descripcion',)
 	tipo_historico = forms.CharField(widget=forms.HiddenInput())
+
+
+class NuevoCobro(ModelForm):
+	class Meta:
+		model = Historico
+	tipo_historico = forms.CharField(widget=forms.HiddenInput())
+	metodo_pago = forms.CharField(widget=forms.HiddenInput())
+
+class NuevoDescuento(ModelForm):
+	class Meta:
+		model = Historico
+	tipo_historico = forms.CharField(widget=forms.HiddenInput())
+	metodo_pago = forms.CharField(widget=forms.HiddenInput())
+

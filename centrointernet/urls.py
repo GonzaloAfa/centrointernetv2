@@ -30,8 +30,10 @@ urlpatterns = patterns('',
 	url(r'^pago/$','pagos.views.pagos'),
 	url(r'^pago/nuevo$','pagos.views.nuevo_pago'),
 	url(r'^pago/page/(?P<page>\d+)$','pagos.views.lista_pagos'),
-	
 
+	url(r'^cobro/nuevo/(?P<username>\w+)$','pagos.views.nuevo_cobro'),
+	url(r'^descuento/nuevo/(?P<username>\w+)$','pagos.views.nuevo_descuento'),
+	
 
 	url(r'^facturar/$', 'facturacion.views.lista_procesos'),
 	url(r'^facturar/proceso/nuevo$', 'facturacion.views.nuevo_proceso', name='inicio'),	

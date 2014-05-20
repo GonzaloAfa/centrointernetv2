@@ -2,10 +2,13 @@ from django.shortcuts import render
 
 
 from pagos.models import Historico
+from clientes.models import Cliente
 
 from pagos.models import PAGO, COBRO, DESCUENTO
 
 from pagos.forms import NuevoPago
+from pagos.forms import NuevoCobro
+from pagos.forms import NuevoDescuento
 
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
@@ -43,7 +46,7 @@ def lista_pagos(request, page):
 
 def nuevo_pago(request):
     if request.method=='POST':
-        form = NuevoPago(request.POST, request.FILES , initial={'tipo_historico' : PAGO},)
+        form = NuevoPago(request.POST, requrest.FILES , initial={'tipo_historico' : PAGO},)
         
         if form.is_valid():
             form.save()
@@ -52,3 +55,28 @@ def nuevo_pago(request):
         form = NuevoPago(initial={'tipo_historico' : PAGO})
     return render_to_response('pay/new.html',{'form':form}, context_instance=RequestContext(request))
 
+def nuevo_cobro(request, username):
+    if request.method=='POST':
+        cliente = Cliente.objects.filter(username=username).first()
+        form = NuevoCobro(request.POST, initial={'tipo_historico' : COBRO, 'metodo_pago': 'Sucursal', 'cliente': cliente},)
+        
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/facturar/proceso/resumen')
+    else:
+        cliente = Cliente.objects.filter(username=username).first()
+        form = NuevoCobro(initial={'tipo_historico' : COBRO, 'metodo_pago': 'Sucursal', 'cliente': cliente})
+    return render_to_response('pay/new.html',{'form':form}, context_instance=RequestContext(request))
+
+def nuevo_descuento(request, username):
+    if request.method=='POST':
+        cliente = Cliente.objects.filter(username=username).first()
+        form = NuevoDescuento(request.POST, initial={'tipo_historico' : DESCUENTO, 'metodo_pago': 'Sucursal', 'cliente': cliente},)
+        
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/facturar/proceso/resumen')
+    else:
+        cliente = Cliente.objects.filter(username=username).first()
+        form = NuevoDescuento(initial={'tipo_historico' : DESCUENTO, 'metodo_pago': 'Sucursal', 'cliente': cliente})
+    return render_to_response('pay/new.html',{'form':form}, context_instance=RequestContext(request))
