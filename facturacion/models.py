@@ -47,6 +47,7 @@ class Proceso(models.Model):
 		return self.ano + " "+ self.mes
 
 class ResumenBoleta(models.Model):
+	
 	proceso 		= models.ForeignKey(Proceso)
 	usuario			= models.ForeignKey(Cliente)
 	estado_usuario 	= models.CharField(max_length=20)

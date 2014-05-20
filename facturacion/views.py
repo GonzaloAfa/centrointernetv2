@@ -7,6 +7,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext, loader, Context
 
 from facturacion.models import Proceso
+from facturacion.models import ResumenBoleta
 from clientes.models import Cliente
 from pagos.models import PAGO, COBRO, DESCUENTO
 from pagos.models import Historico
@@ -26,6 +27,7 @@ def lista_procesos(request):
 	listaprocesos 	= Proceso.objects.all().order_by('fecha_facturacion').reverse()
 	return render_to_response('facturacion/procesos.html', {'list': listaprocesos },context_instance=RequestContext(request))
 
+
 def nuevo_proceso(request):
 	if request.method=='POST':
 		form = NuevoProceso(request.POST, initial={'status': 'Inicio'})
@@ -44,16 +46,27 @@ def listado_clientes(request):
 
 
 def generar_cobros(request):
-	lista_clientes = Cliente.objects.filter(status='Activo' or 'Moroso').order_by('username')
-	for cliente in lista_clientes:
-		# generamos el cobro mensual
-		cobro = Historico(cliente=cliente, cantidad=cliente.servicio.precio, descripcion='Cobro automatico', metodo_pago='Sucursal', tipo_historico=COBRO)
-		cobro.save()
+	proceso = Proceso.objects.filter('Inicio').order_by('fecha_facturacion').reverse().first()
+	descripcion = 'Cobro ' + proceso.mes + ' ' + proceso.ano  
+
+	if proceso.status == 'Inicio':
+		lista_clientes = Cliente.objects.filter(status='Activo' or 'Moroso').order_by('username')
+		for cliente in lista_clientes:
+			# Generamos el cobro mensual
+			cobro = Historico(cliente=cliente, cantidad=cliente.servicio.precio, descripcion=descripcion , metodo_pago='Sucursal', tipo_historico=COBRO)
+			cobro.save()
+		# Cambia de estado a facturado
+		proceso.status = 'Facturar'
+		proceso.save()
+
 	return HttpResponseRedirect(reverse('resumen'))
 
 
 def listado_resumen(request):
+	proceso = Proceso.objects.filter(status='Facturar').order_by('fecha_facturacion').reverse().first()
 	lista_clientes = Cliente.objects.filter(status='Activo' or 'Moroso').order_by('username')
+
+	# itera sobre los clientes para calcular el total a pagar
 	for cliente in lista_clientes:
 		lista_pagos = Historico.objects.filter(cliente=cliente)
 		total = 0
@@ -65,6 +78,11 @@ def listado_resumen(request):
 			elif pago.tipo_historico == DESCUENTO:
 				total -= pago.cantidad
 		cliente.total = total
+		# Crea el resumen de la boleta
+		resumen_boleta = ResumenBoleta(proceso=proceso, usuario=cliente, estado_usuario=cliente.status, plan=cliente.servicio.plan, total= total)
+		resumen_boleta.save()
+
+	proceso.status = 'Resumen'
 	return render_to_response('facturacion/listado_resumen.html', {'list':lista_clientes}, context_instance=RequestContext(request))
 
 
