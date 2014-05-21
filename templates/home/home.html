@@ -129,27 +129,18 @@ class='active'
 				<table class="table table-striped">
 					<thead>
 			          <tr>
-			            <th>#</th>
 			            <th>Usuario</th>
 			            <th>Deuda</th>
 			          </tr>
 			        </thead>
+			        
 			        <tbody>
-			          <tr>
-			            <td>1</td>
-			            <td>Mark</td>
-			            <td>Otto</td>
-			          </tr>
-			          <tr>
-			            <td>2</td>
-			            <td>Jacob</td>
-			            <td>@fat</td>
-			          </tr>
-			          <tr>
-			            <td>3</td>
-			            <td>Larry</td>
-			            <td>the Bird</td>
-			          </tr>
+				        {% for element in morosos %}
+				          <tr>
+				            <td><a href='/perfil/{{element.cliente}}'>{{element.username|capfirst}}</a>
+				            <td> - </td>
+				          </tr>
+				       	{% endfor %}
 			        </tbody>
             	</table>
             </div>

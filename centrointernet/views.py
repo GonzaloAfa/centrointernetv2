@@ -20,10 +20,12 @@ from django.contrib.auth.decorators import login_required
 
 
 def inicio(request):
-    clientes = Cliente.objects.all().order_by('date_start').reverse()[:5] 
-    problemas = Problema.objects.all().order_by('datetime').reverse()[:5]
-    pagos = Historico.objects.filter( tipo_historico = 'Pago').order_by('datetime').reverse()[:5]
-    return render_to_response('home/home.html', {'clients': clientes, 'problems': problemas , 'pays': pagos}, context_instance=RequestContext(request))
+    clientes 	= Cliente.objects.all().order_by('date_start').reverse()[:5] 
+    problemas 	= Problema.objects.all().order_by('datetime').reverse()[:5]
+    pagos 		= Historico.objects.filter( tipo_historico = 'Pago').order_by('datetime').reverse()[:5]
+    morosos 	= Cliente.objects.filter( status = 'Moroso').reverse()[:5] 
+
+    return render_to_response('home/home.html', {'clients': clientes, 'problems': problemas , 'morosos': morosos, 'pays': pagos}, context_instance=RequestContext(request))
 
 def user_login(request):
 	if not request.user.is_anonymous():
