@@ -51,7 +51,7 @@ def generar_cobros(request):
 	
 	if proceso is not None and proceso.status == 'Inicio':
 		print proceso.status
-		descripcion = 'Cobro ' + proceso.mes + ' ' + proceso.ano  
+		descripcion = proceso.mes + ' ' + proceso.ano  
 		lista_clientes = Cliente.objects.filter(status='Activo' or 'Moroso').order_by('username')
 		for cliente in lista_clientes:
 			# Generamos el cobro mensual
@@ -91,6 +91,15 @@ def listado_resumen(request):
 	return render_to_response('facturacion/listado_resumen.html', {'list':lista_clientes}, context_instance=RequestContext(request))
 
 
+def boleta(request, username):
+	cliente 	= get_object_or_404(Cliente, username = username)
+	historico   = Historico.objects.filter(cliente=cliente)[:10]
+	return render_to_response('facturacion/boleta.html',
+		{'cliente': cliente, 'historico': historico},
+		 context_instance=RequestContext(request))
+
+
+
 def generar_pdfs(request):
 	return render_to_response('facturacion/facturar.html', context_instance=RequestContext(request))
 
@@ -118,7 +127,5 @@ def enviar_mail(request, id):
 	return HttpResponseRedirect('/resumen/1')
 
     
-def boleta(request, username):
-	return render_to_response('facturacion/boleta.html', context_instance=RequestContext(request))
 
 

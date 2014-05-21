@@ -22,19 +22,7 @@
           </tr>
          </thead>
         <tbody>
-<!--         <tr>
-			
-			<td><a href='/perfil/#'>Dllanten</a></td>
-			<td>Activo</td>
-			<td>Plan 14900</td>
-			
-			<td class="text-right">
-				<a href="/#" class="btn btn-success btn-xs">
-					<span class="glyphicon glyphicon-edit"></span> Cambiar
-				</a>
 
-			</td>
-		</tr> -->
 
 		{% for element in list %}
 		<tr>
@@ -70,25 +58,6 @@
 	<a href="{% url 'generar_cobros' %}"><button type="button" class="btn btn-success ">Generar cobro mensual</button></a>
 </p>
 
-{%if list %}
-
-	<ul class="pagination">
-		
-	  {%if list.has_previous %}
-		  <li><a href="/cliente/page/{{list.previous_page_number}}">&laquo;</a></li>
-	  {% else %}
-		  <li><a href="/cliente/page/1">&laquo;</a></li>
-	  {% endif %}
-
-	  {%if list.has_next %}
-		  <li><a href="/cliente/page/{{list.next_page_number}}">&raquo;</a></li>
-	  {% endif %}
-	  
-
-	</ul>
-
-	<h4>Página {{list.number}} de {{list.paginator.num_pages}}</h4>
-{% endif%}
 
 
 {% endblock %}

@@ -35,9 +35,34 @@
 			<td>{{element.periodo_inicio}}</td>
 			<td>-</td>
 			<td class="text-right">
-				<a href="/facturar/proceso/resumen/{{element.id}}" class="btn btn-success btn-xs">
-					<span class="glyphicon glyphicon-edit"></span> Resumen
-				</a>
+
+				{% if element.status == 'Inicio' %}
+					<a href="/facturar/proceso/clientes" class="btn btn-success btn-xs">
+					<span class="glyphicon glyphicon-edit"></span>Cambiar plan
+					</a>
+				
+				{% elif element.status == 'Facturar' %}
+					<a href="/facturar/proceso/clientes" class="btn btn-success btn-xs">
+					<span class="glyphicon glyphicon-edit"></span>Facturar
+					</a>
+
+				{% elif element.status == 'Resumen' %}
+					<a href="/facturar/proceso/resumen/" class="btn btn-success btn-xs">
+					<span class="glyphicon glyphicon-edit"></span>Descuentos/Cobros
+					</a>
+
+				{% elif element.status == 'Email Enviado' %}				<a href="/facturar/proceso/resumen/{{element.id}}" class="btn btn-success btn-xs">
+					<span class="glyphicon glyphicon-edit"></span> Enviar Email
+					</a>
+	
+
+				{% elif element.status == 'Archivado' %}
+					<a href="/facturar/proceso/resumen/{{element.id}}" class="btn btn-success btn-xs">
+					<span class="glyphicon glyphicon-edit"></span> Archivado
+					</a>
+				
+				{% endif %}
+
 
 			</td>
 
@@ -47,26 +72,5 @@
         </tbody>
 
   	</table>	
-
-{%if list %}
-
-	<ul class="pagination">
-		
-	  {%if list.has_previous %}
-		  <li><a href="/cliente/page/{{list.previous_page_number}}">&laquo;</a></li>
-	  {% else %}
-		  <li><a href="/cliente/page/1">&laquo;</a></li>
-	  {% endif %}
-
-	  {%if list.has_next %}
-		  <li><a href="/cliente/page/{{list.next_page_number}}">&raquo;</a></li>
-	  {% endif %}
-	  
-
-	</ul>
-
-	<h4>Página {{list.number}} de {{list.paginator.num_pages}}</h4>
-{% endif%}
-
 
 {% endblock %}

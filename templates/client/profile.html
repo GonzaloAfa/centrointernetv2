@@ -103,7 +103,7 @@
 
 			       	{% for element in problemas %}
 			          <tr>
-						<td>{{element.datetime|date:'SHORT_DATETIME_FORMAT'}}</td>
+						<td>{{element.datetime|date:'SHORT_DATE_FORMAT'}}</td>
 						<td>{{element.tipo_problema}}</td>
 						<td>{{element.status}}</td>
 					</tr>

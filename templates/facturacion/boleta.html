@@ -14,14 +14,6 @@
     <!-- Bootstrap core CSS -->
     <link href="{{STATIC_URL}}css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
   </head>
 
   <body>
@@ -40,8 +32,8 @@
           <div class="col-xs-4">
             <address>
             <strong>Señor(a):</strong><br>
-              John Smith<br>
-              Pasaje 8, 01356<br>
+              {{cliente.nombre}} {{cliente.apellido}}<br>
+              {{cliente.direccion}}<br>
               Puente Alto, Chile
             </address>
           </div>
@@ -77,57 +69,24 @@
                 <thead>
                                 <tr>
                       <td><strong>Fecha</strong></td>
+                      <td class="text-center"><strong>Tipo</strong></td>
                       <td class="text-center"><strong>Detalle</strong></td>
-                      <td class="text-center"><strong>Medio Pago</strong></td>
-                      <td class="text-right"><strong>Monto</strong></td>
-                                </tr>
+                      <td class="text-center"><strong>Monto</strong></td>
+                      <td class="text-right"><strong>Medio</strong></td>
+                    </tr>
                 </thead>
                 <tbody>
-                  <!-- foreach ($order->lineItems as $line) or some such thing here -->
+                  {% for element in historico %}
                   <tr>
-                    <td>16/04/2014</td>
-                    <td class="text-center">Mes Abril</td>
-                    <td class="text-center">Servipag</td>
-                    <td class="text-right">$10.99</td>
+                    <td>{{element.datetime| date:'SHORT_DATE_FORMAT'}}</td>
+                    <td class="text-center">{{element.tipo_historico}}</td>
+                    <td class="text-center">{{element.descripcion}}</td>
+                    <td class="text-center">{{element.metodo_pago}}</td>
+                    <td class="text-right">{{element.cantidad}}</td>
                   </tr>
-                                <tr>
-                  <td>16/04/2014</td>
-                    <td class="text-center">Mes Diciembre</td>
-                    <td class="text-center">Transferencia</td>
-                    <td class="text-right">$60.00</td>
-                  </tr>
-                                <tr>
-                  <td>16/04/2014</td>
-                    <td class="text-center">Descuento</td>
-                    <td class="text-center">-</td>
-                    <td class="text-right">$600.00</td>
-                  </tr>
-                   <td>16/04/2014</td>
-                    <td class="text-center">Descuento</td>
-                    <td class="text-center">-</td>
-                    <td class="text-right">$600.00</td>
-                  </tr>
-                     <td>16/04/2014</td>
-                    <td class="text-center">Descuento</td>
-                    <td class="text-center">-</td>
-                    <td class="text-right">$600.00</td>
-                  </tr>
-                     <td>16/04/2014</td>
-                    <td class="text-center">Descuento</td>
-                    <td class="text-center">-</td>
-                    <td class="text-right">$600.00</td>
-                  </tr>
-                     <td>16/04/2014</td>
-                    <td class="text-center">Descuento</td>
-                    <td class="text-center">-</td>
-                    <td class="text-right">$600.00</td>
-                  </tr>
-                  <tr>
-                    <td class="no-line"></td>
-                    <td class="no-line"></td>
-                    <td class="no-line text-center"><h3><strong>Total</strong></h3></td>
-                    <td class="no-line text-right"><h3><strong>$685.99</strong></h3></td>
-                  </tr>
+                  {% endfor %}
+         
+                 
                 </tbody>
               </table>
             </div>

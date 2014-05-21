@@ -26,26 +26,37 @@ class='active'
     <div class="stepwizard-row">
         <div class="stepwizard-step">
             <button type="button" class="btn btn-default btn-circle" disabled="disabled">1</button>
+            
             <p>Iniciar proceso</p>
         </div>
         <div class="stepwizard-step">
-            <button type="button" class="btn btn-default btn-circle" disabled="disabled">2</button>
+            {% block stepwizard2 %}
+                <button type="button" class="btn btn-default btn-circle" disabled="disabled">2</button>
+            {% endblock%}
             <p>Cambiar plan</p>
         </div>
         <div class="stepwizard-step">
-            <button type="button" class="btn btn-default btn-circle" disabled="disabled">3</button>
+            {% block stepwizard3 %}
+                <button type="button" class="btn btn-default btn-circle" disabled="disabled">3</button>
+            {% endblock%}
             <p>Costo mensual</p>
         </div> 
         <div class="stepwizard-step">
-            <button type="button" class="btn btn-default btn-circle" disabled="disabled">4</button>
+            {% block stepwizard4 %}
+                <button type="button" class="btn btn-default btn-circle" disabled="disabled">4</button>
+            {% endblock%}
             <p>Descuentos/Cobros</p>
         </div> 
         <div class="stepwizard-step">
-            <button type="button" class="btn btn-default btn-circle" disabled="disabled">5</button>
+            {% block stepwizard5 %}
+                <button type="button" class="btn btn-default btn-circle" disabled="disabled">5</button>
+            {% endblock%}
             <p>Generar PDF</p>
         </div> 
         <div class="stepwizard-step">
-            <button type="button" class="btn btn-default btn-circle" disabled="disabled">6</button>
+            {% block stepwizard6 %}
+                <button type="button" class="btn btn-default btn-circle" disabled="disabled">6</button>
+            {% endblock%} 
             <p>Enviar Email</p>
         </div> 
     </div>
