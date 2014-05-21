@@ -46,7 +46,7 @@ def lista_pagos(request, page):
 
 def nuevo_pago(request):
     if request.method=='POST':
-        form = NuevoPago(request.POST, requrest.FILES , initial={'tipo_historico' : PAGO},)
+        form = NuevoPago(request.POST, request.FILES , initial={'tipo_historico' : PAGO},)
         
         if form.is_valid():
             form.save()
