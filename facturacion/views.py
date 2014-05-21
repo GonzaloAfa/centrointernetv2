@@ -1,3 +1,4 @@
+import pdb
 from django.shortcuts import render
 
 # Create your views here.
@@ -46,10 +47,11 @@ def listado_clientes(request):
 
 
 def generar_cobros(request):
-	proceso = Proceso.objects.filter('Inicio').order_by('fecha_facturacion').reverse().first()
-	descripcion = 'Cobro ' + proceso.mes + ' ' + proceso.ano  
-
-	if proceso.status == 'Inicio':
+	proceso = Proceso.objects.filter(status='Inicio').order_by('fecha_facturacion').reverse().first()
+	
+	if proceso is not None and proceso.status == 'Inicio':
+		print proceso.status
+		descripcion = 'Cobro ' + proceso.mes + ' ' + proceso.ano  
 		lista_clientes = Cliente.objects.filter(status='Activo' or 'Moroso').order_by('username')
 		for cliente in lista_clientes:
 			# Generamos el cobro mensual
@@ -58,6 +60,7 @@ def generar_cobros(request):
 		# Cambia de estado a facturado
 		proceso.status = 'Facturar'
 		proceso.save()
+		
 
 	return HttpResponseRedirect(reverse('resumen'))
 
@@ -79,10 +82,12 @@ def listado_resumen(request):
 				total -= pago.cantidad
 		cliente.total = total
 		# Crea el resumen de la boleta
-		resumen_boleta = ResumenBoleta(proceso=proceso, usuario=cliente, estado_usuario=cliente.status, plan=cliente.servicio.plan, total= total)
-		resumen_boleta.save()
-
-	proceso.status = 'Resumen'
+		if proceso is not None:
+			resumen_boleta = ResumenBoleta(proceso=proceso, usuario=cliente, estado_usuario=cliente.status, plan=cliente.servicio.plan, total= total)
+			resumen_boleta.save()
+	if proceso is not None:
+		proceso.status = 'Resumen'
+		proceso.save()
 	return render_to_response('facturacion/listado_resumen.html', {'list':lista_clientes}, context_instance=RequestContext(request))
 
 
@@ -115,4 +120,5 @@ def enviar_mail(request, id):
     
 def boleta(request, username):
 	return render_to_response('facturacion/boleta.html', context_instance=RequestContext(request))
+
 
