@@ -25,8 +25,9 @@ class='active'
 <div class="stepwizard">
     <div class="stepwizard-row">
         <div class="stepwizard-step">
+            {% block stepwizard1 %}
             <button type="button" class="btn btn-default btn-circle" disabled="disabled">1</button>
-            
+            {% endblock %}
             <p>Iniciar proceso</p>
         </div>
         <div class="stepwizard-step">
@@ -39,7 +40,7 @@ class='active'
             {% block stepwizard3 %}
                 <button type="button" class="btn btn-default btn-circle" disabled="disabled">3</button>
             {% endblock%}
-            <p>Costo mensual</p>
+            <p>Cobro mensual</p>
         </div> 
         <div class="stepwizard-step">
             {% block stepwizard4 %}

@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
 
     <title>Boletas</title>
 
@@ -71,8 +70,8 @@
                       <td><strong>Fecha</strong></td>
                       <td class="text-center"><strong>Tipo</strong></td>
                       <td class="text-center"><strong>Detalle</strong></td>
-                      <td class="text-center"><strong>Monto</strong></td>
-                      <td class="text-right"><strong>Medio</strong></td>
+                      <td class="text-center"><strong>Medio</strong></td>
+                      <td class="text-left"><strong>Monto</strong></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -82,7 +81,7 @@
                     <td class="text-center">{{element.tipo_historico}}</td>
                     <td class="text-center">{{element.descripcion}}</td>
                     <td class="text-center">{{element.metodo_pago}}</td>
-                    <td class="text-right">{{element.cantidad}}</td>
+                    <td class="text-left">${{element.cantidad}}</td>
                   </tr>
                   {% endfor %}
          

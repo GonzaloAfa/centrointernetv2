@@ -8,11 +8,15 @@
 class="list-group-item active"
 {% endblock %}		
 
+{% block stepwizard4 %}
+	<button type="button" class="btn btn-primary btn-circle" disabled="disabled">4</button>
+{% endblock%}
+
+
 {% block context %}
 
 	
-
-
+	
 	<table  class="table table-condensed">
   		<thead>
   		<tr>
@@ -63,31 +67,9 @@ class="list-group-item active"
 
   	</table>	
 
-{%if list %}
-
-	<ul class="pagination">
-		
-	  {%if list.has_previous %}
-		  <li><a href="/cliente/page/{{list.previous_page_number}}">&laquo;</a></li>
-	  {% else %}
-		  <li><a href="/cliente/page/1">&laquo;</a></li>
-	  {% endif %}
-
-	  {%if list.has_next %}
-		  <li><a href="/cliente/page/{{list.next_page_number}}">&raquo;</a></li>
-	  {% endif %}
-	  
-
-	</ul>
-
-	<h4>Página {{list.number}} de {{list.paginator.num_pages}}</h4>
-{% endif%}
-
-<!-- Indicates a successful or positive action -->
-
 <p class="text-right">
 	<a href="{% url 'generar_pdf' 1 %}"><button type="button" class="btn btn-success ">
-		Generar Pdf</button></a>
+		Generar PDF</button></a>
 </p>
 
 <!--
