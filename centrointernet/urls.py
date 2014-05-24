@@ -32,6 +32,8 @@ urlpatterns = patterns('',
 	url(r'^pago/page/(?P<page>\d+)$','pagos.views.lista_pagos'),
 
 	url(r'^cobro/nuevo/(?P<username>\w+)$','pagos.views.nuevo_cobro'),
+	url(r'^cobro/nuevo/$','pagos.views.nuevo_cobro_general'),
+	url(r'^descuento/nuevo/$','pagos.views.nuevo_descuento_general'),
 	url(r'^descuento/nuevo/(?P<username>\w+)$','pagos.views.nuevo_descuento'),
 	
 
@@ -47,9 +49,7 @@ urlpatterns = patterns('',
 
 	url(r'^facturar/PDF/descargar/(?P<id>\d+)$', 'facturacion.views.generar_pdf', name='generar_pdf'),
 	url(r'^facturar/email/enviar/(?P<id>\d+)$', 'facturacion.views.enviar_mail'),
-
-	url(r'^facturar/boleta/ver/(?P<username>\w+)$', 'facturacion.views.boleta'),
-
+	url(r'^facturar/boleta/ver/(?P<username>\w+)$','facturacion.views.boleta'),
 
 
     url(r'^admin/', include(admin.site.urls)),
