@@ -91,12 +91,15 @@ def listado_resumen(request):
 	if proceso is not None:
 		proceso.status = 'Resumen'
 		proceso.save()
-	return render_to_response('facturacion/listado_resumen.html', {'list':lista_clientes}, context_instance=RequestContext(request))
+	return render_to_response('facturacion/listado_resumen.html', {'list':lista_clientes, 'proceso': proceso}, context_instance=RequestContext(request))
 
 @login_required()
 def boleta(request, username):
 	cliente 	= get_object_or_404(Cliente, username = username)
 	historico   = Historico.objects.filter(cliente=cliente)[:10]
+	proceso 	= Proceso.objects.filter(status='Resumen').order_by('fecha_facturacion').reverse().first()	
+	resumen_boleta 	= get_object_or_404(ResumenBoleta, proceso=proceso) 
+	
 	return render_to_response('facturacion/boleta.html',
 		{'cliente': cliente, 'historico': historico},
 		 context_instance=RequestContext(request))
