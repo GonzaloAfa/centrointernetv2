@@ -101,7 +101,7 @@ def boleta(request, username):
 	resumen_boleta 	= get_object_or_404(ResumenBoleta, proceso=proceso) 
 	
 	return render_to_response('facturacion/boleta.html',
-		{'cliente': cliente, 'historico': historico},
+		{'cliente': cliente, 'historico': historico, 'proceso': proceso, 'resumen_boleta': resumen_boleta},
 		 context_instance=RequestContext(request))
 
 

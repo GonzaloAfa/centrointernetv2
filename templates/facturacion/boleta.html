@@ -45,10 +45,10 @@
           </div>
           <div class="col-xs-4 text-right">
             <address>
-              <strong>Vencimiento</strong><br>
-              Abril 2014<br>
-              Periodo 1-30 Abril<br>              
-              Pagar hasta 22-Abril-2014<br>
+              <strong>Proceso {{proceso}}</strong><br>
+              Plan {{resumen_boleta.plan}}<br>
+              Pagar hasta:<br>              
+               {{proceso.fecha_corte}}<br>
             </address>
           </div>
         </div>
@@ -60,7 +60,7 @@
       <div class="col-md-6">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title"><strong>Historico</strong></h3>
+            <h3 class="panel-title"><strong>Resumen de pagos/cobros/descuentos</strong></h3>
           </div>
           <div class="panel-body">
             <div class="table-responsive">
@@ -81,10 +81,18 @@
                     <td class="text-center">{{element.tipo_historico}}</td>
                     <td class="text-center">{{element.descripcion}}</td>
                     <td class="text-center">{{element.metodo_pago}}</td>
-                    <td class="text-left">${{element.cantidad}}</td>
+                    <td class="text-left">$ {{element.cantidad}}</td>
                   </tr>
                   {% endfor %}
-         
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="text-center"><strong>Total:</strong></td>
+                    <td class="text-left">$ {{resumen_boleta.total}}</td>
+                  </tr>
+
+          
                  
                 </tbody>
               </table>
@@ -96,32 +104,26 @@
       <div class="col-md-3">
       <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title"><strong>Resumen</strong></h3>
+            <h3 class="panel-title text-center"><strong>Total a Pagar</strong></h3>
           </div>
-          <div class="panel-body">
-            <div class="table-responsive">
-              <table class="table table-condensed">
+
+          <table class="table table-condensed">
                 <tbody>
-                  <!-- foreach ($order->lineItems as $line) or some such thing here -->
                   <tr>
-                    <td>Saldo anterior</td>
-                    <td class="text-right">$10.99</td>
+                    <td class="text-center"><h2><strong>$ {{resumen_boleta.total}}</strong></h2></td>
                   </tr>
-                                <tr>
-                    <td>Pagos recibidos</td>
-                    <td class="text-right">$60.00</td>
-                  </tr>
-                  <tr>
-                    <td>Total del mes</td>
-                    <td class="text-right">$600.00</td>
-                  </tr>
-                
-                  <tr>
-                    <td><strong>Total a pagar</strong></td>
-                    <td class="text-right"><strong>$685.99</strong></td>
-                  </tr>
+
                 </tbody>
-              </table>
+          </table>
+              <hr>
+          <div class="panel-body">
+            <div class="table-responsive text-center">
+                <tr>
+                    <td>Recuerde ir a pagar antes del:</td>
+                </tr>
+                <tr>
+                  <td><h3>{{proceso.fecha_corte}}<h3></td>
+                </tr>
             </div>
           </div>
         </div>
@@ -137,7 +139,7 @@
 
 
       <div class="footer">
-        <p>&copy; CentroInternet 2014</p>
+        <p>&copy; CentroInternet {{proceso.ano}}</p>
       </div>
 
     </div> <!-- /container -->
