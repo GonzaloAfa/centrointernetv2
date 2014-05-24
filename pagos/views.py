@@ -70,6 +70,19 @@ def nuevo_cobro(request, username):
     return render_to_response('pay/new.html',{'form':form}, context_instance=RequestContext(request))
 
 @login_required()
+def nuevo_cobro_general(request):
+    if request.method=='POST':
+        form = NuevoCobro(request.POST, initial={'tipo_historico' : COBRO, 'metodo_pago': 'Sucursal'})
+        
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/pago')
+    else:
+        form = NuevoCobro(initial={'tipo_historico' : COBRO, 'metodo_pago': 'Sucursal',})
+    return render_to_response('pay/new.html',{'form':form}, context_instance=RequestContext(request))
+
+
+@login_required()
 def nuevo_descuento(request, username):
     if request.method=='POST':
         cliente = Cliente.objects.filter(username=username).first()
@@ -81,4 +94,16 @@ def nuevo_descuento(request, username):
     else:
         cliente = Cliente.objects.filter(username=username).first()
         form = NuevoDescuento(initial={'tipo_historico' : DESCUENTO, 'metodo_pago': 'Sucursal', 'cliente': cliente})
+    return render_to_response('pay/new.html',{'form':form}, context_instance=RequestContext(request))
+
+@login_required()
+def nuevo_descuento_general(request):
+    if request.method=='POST':
+        form = NuevoDescuento(request.POST, initial={'tipo_historico' : DESCUENTO, 'metodo_pago': 'Sucursal'})
+        
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/facturar/proceso/resumen')
+    else:
+        form = NuevoDescuento(initial={'tipo_historico' : DESCUENTO, 'metodo_pago': 'Sucursal'})
     return render_to_response('pay/new.html',{'form':form}, context_instance=RequestContext(request))
