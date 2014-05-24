@@ -24,11 +24,11 @@ from django.core.paginator import InvalidPage
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
-# Create your views here.
+@login_required()
 def clientes(request):
     return HttpResponseRedirect('/cliente/page/1')
 
-
+@login_required()
 def lista_clientes(request, page):
     listaclientes = Cliente.objects.all().order_by('date_start').reverse()
     paginator = Paginator(listaclientes,3)
@@ -45,7 +45,7 @@ def lista_clientes(request, page):
 
     return render_to_response('client/list.html',{'list':clientes}, context_instance=RequestContext(request))
 
-
+@login_required()
 def nuevo_cliente(request):
     if request.method=='POST':
         form = NuevoCliente(request.POST, request.FILES)
@@ -56,7 +56,7 @@ def nuevo_cliente(request):
         form = NuevoCliente()
     return render_to_response('client/new.html',{'form':form}, context_instance=RequestContext(request))
 
-
+@login_required()
 def modificar_cliente(request, username):
     p = get_object_or_404(Cliente, username = username)
 
@@ -100,7 +100,7 @@ def modificar_cliente(request, username):
 
 
 
-
+@login_required()
 def perfil_cliente(request, username):
     cliente     = get_object_or_404(Cliente, username = username)
     problema    = Problema.objects.filter(cliente=cliente)[:5]

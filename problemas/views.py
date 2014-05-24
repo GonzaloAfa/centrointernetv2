@@ -21,11 +21,11 @@ from django.core.paginator import InvalidPage
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
-
+@login_required()
 def problemas(request):
     return HttpResponseRedirect('/problema/page/1')
 
-
+@login_required()
 def lista_problemas(request, page):
     listaproblemas = Problema.objects.filter( status = 'Informado').order_by('datetime').reverse()
     paginator = Paginator(listaproblemas,3)
@@ -42,6 +42,7 @@ def lista_problemas(request, page):
 
     return render_to_response('problem/list.html',{'list':problemas}, context_instance=RequestContext(request))
 
+@login_required()
 def nuevo_problema(request):
     if request.method=='POST':
         form = NuevoProblema(request.POST, request.FILES)
@@ -53,7 +54,7 @@ def nuevo_problema(request):
     return render_to_response('problem/new.html',{'form':form}, context_instance=RequestContext(request))
 
 
-
+@login_required()
 def detalle_problema(request, id_problem):
     problema         = get_object_or_404(Problema, id = id_problem)
     cliente          = get_object_or_404(Cliente, username=problema.cliente)
@@ -63,7 +64,7 @@ def detalle_problema(request, id_problem):
         {'problem': problema, 'client': cliente, 'list_problem': lista_problemas},
          context_instance=RequestContext(request))
 
-
+@login_required()
 def modificar_problema(request, id_problem):
     p         = get_object_or_404(Problema, id = id_problem)
 

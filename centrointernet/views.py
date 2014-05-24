@@ -18,7 +18,7 @@ from django.contrib.auth.decorators import login_required
 
 
 
-
+@login_required()
 def inicio(request):
     clientes 	= Cliente.objects.all().order_by('date_start').reverse()[:5] 
     problemas 	= Problema.objects.all().order_by('datetime').reverse()[:5]

@@ -22,11 +22,11 @@ from django.core.paginator import InvalidPage
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
-
+@login_required()
 def pagos(request):
     return HttpResponseRedirect('/pago/page/1')
 
-
+@login_required()
 def lista_pagos(request, page):
     listapagos = Historico.objects.filter( tipo_historico = PAGO ).order_by('datetime').reverse()
     paginator = Paginator(listapagos,3)
@@ -43,7 +43,7 @@ def lista_pagos(request, page):
 
     return render_to_response('pay/list.html',{'list':listapagos}, context_instance=RequestContext(request))
 
-
+@login_required()
 def nuevo_pago(request):
     if request.method=='POST':
         form = NuevoPago(request.POST, request.FILES , initial={'tipo_historico' : PAGO},)
@@ -55,6 +55,7 @@ def nuevo_pago(request):
         form = NuevoPago(initial={'tipo_historico' : PAGO})
     return render_to_response('pay/new.html',{'form':form}, context_instance=RequestContext(request))
 
+@login_required()
 def nuevo_cobro(request, username):
     if request.method=='POST':
         cliente = Cliente.objects.filter(username=username).first()
@@ -68,6 +69,7 @@ def nuevo_cobro(request, username):
         form = NuevoCobro(initial={'tipo_historico' : COBRO, 'metodo_pago': 'Sucursal', 'cliente': cliente})
     return render_to_response('pay/new.html',{'form':form}, context_instance=RequestContext(request))
 
+@login_required()
 def nuevo_descuento(request, username):
     if request.method=='POST':
         cliente = Cliente.objects.filter(username=username).first()

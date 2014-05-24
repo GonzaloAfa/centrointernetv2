@@ -120,3 +120,9 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'testcentrointernet@gmail.com'
 EMAIL_HOST_PASSWORD = 'holamundo1313'
 EMAIL_PORT = 587
+
+
+# Redirect when login is correct.
+LOGIN_REDIRECT_URL = "/inicio"
+# Redirect when login is not correct.
+LOGIN_URL = '/'

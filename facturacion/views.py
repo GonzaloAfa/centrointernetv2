@@ -23,12 +23,12 @@ from facturacion.utils import saveHtmlToPdf, send_mail_to_client, PDF_HTTP_Respo
 #usar name url para redireccionar
 from django.core.urlresolvers import reverse
 
-
+@login_required()
 def lista_procesos(request):
 	listaprocesos 	= Proceso.objects.all().order_by('fecha_facturacion').reverse()
 	return render_to_response('facturacion/procesos.html', {'list': listaprocesos },context_instance=RequestContext(request))
 
-
+@login_required()
 def nuevo_proceso(request):
 	if request.method=='POST':
 		form = NuevoProceso(request.POST, initial={'status': 'Inicio'})
@@ -40,12 +40,12 @@ def nuevo_proceso(request):
 
 	return render_to_response('facturacion/nuevo_proceso.html',{'form':form}, context_instance=RequestContext(request))
 
-
+@login_required()
 def listado_clientes(request):
 	lista_clientes = Cliente.objects.filter(status='Activo' or 'Moroso').order_by('username')
 	return render_to_response('facturacion/listado_clientes.html',{'list':lista_clientes}, context_instance=RequestContext(request))
 
-
+@login_required()
 def generar_cobros(request):
 	proceso = Proceso.objects.filter(status='Inicio').order_by('fecha_facturacion').reverse().first()
 	
@@ -64,7 +64,7 @@ def generar_cobros(request):
 
 	return HttpResponseRedirect(reverse('resumen'))
 
-
+@login_required()
 def listado_resumen(request):
 	proceso = Proceso.objects.filter(status='Facturar').order_by('fecha_facturacion').reverse().first()
 	lista_clientes = Cliente.objects.filter(status='Activo' or 'Moroso').order_by('username')
@@ -90,7 +90,7 @@ def listado_resumen(request):
 		proceso.save()
 	return render_to_response('facturacion/listado_resumen.html', {'list':lista_clientes}, context_instance=RequestContext(request))
 
-
+@login_required()
 def boleta(request, username):
 	cliente 	= get_object_or_404(Cliente, username = username)
 	historico   = Historico.objects.filter(cliente=cliente)[:10]
@@ -99,11 +99,11 @@ def boleta(request, username):
 		 context_instance=RequestContext(request))
 
 
-
+@login_required()
 def generar_pdfs(request):
 	return render_to_response('facturacion/facturar.html', context_instance=RequestContext(request))
 
-
+@login_required()
 def generar_pdf(request, id):
 	template = loader.get_template('facturacion/boleta.html')
 	context = RequestContext(request, {})
@@ -111,7 +111,7 @@ def generar_pdf(request, id):
 	filename = 'boleta.pdf'
 	return PDF_HTTP_Response(html, filename)
 
-
+@login_required()
 def enviar_mail(request, id):
 	template = loader.get_template('facturacion/boleta.html')
 	context = RequestContext(request, {})
