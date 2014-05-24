@@ -23,4 +23,3 @@ class Problema (models.Model):
 	comentario 		= models.TextField(blank=False)
 	datetime 		= models.DateTimeField(auto_now=True)
 	status 			= models.CharField(max_length=20, choices=ESTADO_PROBLEMA)
-	descuento		= models.IntegerField()
