@@ -20,6 +20,9 @@ from django.core.paginator import InvalidPage
 from facturacion.forms import NuevoProceso
 from facturacion.utils import saveHtmlToPdf, send_mail_to_client, PDF_HTTP_Response
 
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
+
 #usar name url para redireccionar
 from django.core.urlresolvers import reverse
 
