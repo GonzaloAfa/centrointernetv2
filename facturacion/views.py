@@ -26,6 +26,8 @@ from django.contrib.auth.decorators import login_required
 #usar name url para redireccionar
 from django.core.urlresolvers import reverse
 
+from django.db.models import Q
+
 @login_required()
 def lista_procesos(request):
 	listaprocesos 	= Proceso.objects.all().order_by('fecha_facturacion').reverse()
@@ -69,8 +71,8 @@ def generar_cobros(request):
 
 @login_required()
 def listado_resumen(request):
-	proceso = Proceso.objects.filter(status='Facturar').order_by('fecha_facturacion').reverse().first()
-	lista_clientes = Cliente.objects.filter(status='Activo' or 'Moroso').order_by('username')
+	proceso = Proceso.objects.filter(Q(status='Facturar')| Q(status='Resumen') ).order_by('fecha_facturacion').reverse().first()
+	lista_clientes = Cliente.objects.filter(Q(status='Activo') | Q(status='Moroso')).order_by('username')
 
 	# itera sobre los clientes para calcular el total a pagar
 	for cliente in lista_clientes:
@@ -98,8 +100,9 @@ def boleta(request, username):
 	cliente 	= get_object_or_404(Cliente, username = username)
 	historico   = Historico.objects.filter(cliente=cliente)[:10]
 	proceso 	= Proceso.objects.filter(status='Resumen').order_by('fecha_facturacion').reverse().first()	
-	resumen_boleta 	= get_object_or_404(ResumenBoleta, proceso=proceso) 
+	resumen_boleta 	= ResumenBoleta.objects.filter(proceso=proceso).reverse().first()
 	
+	print resumen_boleta
 	return render_to_response('facturacion/boleta.html',
 		{'cliente': cliente, 'historico': historico, 'proceso': proceso, 'resumen_boleta': resumen_boleta},
 		 context_instance=RequestContext(request))
