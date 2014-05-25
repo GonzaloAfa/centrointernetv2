@@ -21,13 +21,13 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
 
     <div class="container">
       <div class="header">
-        <h3 class="text-muted">CentroInternet</h3>
+        <h3 class="text-center">CentroInternet</h3>
       </div>
 
 
   <div class="container">
     <div class="row">
-        <div class="col-xs-9">
+        <div class="col-xs-12">
         <hr>
         <div class="row">
           <div class="col-xs-4">
@@ -62,7 +62,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
       <div class="col-md-6">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title"><strong>Resumen de pagos/cobros/descuentos</strong></h3>
+            <h3 class="panel-title"><strong>Resumen</strong></h3>
           </div>
           <div class="panel-body">
             <div class="table-responsive">
@@ -73,7 +73,8 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
                       <td class="text-center"><strong>Tipo</strong></td>
                       <td class="text-center"><strong>Detalle</strong></td>
                       <td class="text-center"><strong>Medio</strong></td>
-                      <td class="text-left"><strong>Monto</strong></td>
+                      <td></td>
+                      <td class="text-right"><strong>Monto</strong></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -83,7 +84,9 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
                     <td class="text-center">{{element.tipo_historico}}</td>
                     <td class="text-center">{{element.descripcion}}</td>
                     <td class="text-center">{{element.metodo_pago}}</td>
-                    <td class="text-left">$ {{element.cantidad}}</td>
+                    <td class="text-right">$</td>
+                    <td class="text-right">{% if element.tipo_historico != 'Cobro' %}-{% endif %}
+                    {{element.cantidad}}</td>
                   </tr>
                   {% endfor %}
                   <tr>
@@ -91,7 +94,8 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
                     <td></td>
                     <td></td>
                     <td class="text-center"><strong>Total:</strong></td>
-                    <td class="text-left">$ {{resumen_boleta.total}}</td>
+                    <td class="text-left">$</td>
+                    <td class="text-left">{{resumen_boleta.total}}</td>
                   </tr>
 
           
