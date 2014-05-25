@@ -45,7 +45,7 @@ urlpatterns = patterns('',
 
 
 
-	url(r'^facturar/proceso/generar/PDFs/(?P<id>\d+)$', 'facturacion.views.generar_pdf', name='generar_pdfs'),
+	url(r'^facturar/proceso/generar/PDFs/$', 'facturacion.views.generar_pdfs', name='generar_pdfs'),
 
 	url(r'^facturar/PDF/descargar/(?P<id>\d+)$', 'facturacion.views.generar_pdf', name='generar_pdf'),
 	url(r'^facturar/email/enviar/(?P<id>\d+)$', 'facturacion.views.enviar_mail'),

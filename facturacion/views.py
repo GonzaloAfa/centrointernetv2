@@ -23,6 +23,8 @@ from facturacion.utils import saveHtmlToPdf, send_mail_to_client, PDF_HTTP_Respo
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
+from weasyprint import HTML, Document
+
 #usar name url para redireccionar
 from django.core.urlresolvers import reverse
 
@@ -110,7 +112,26 @@ def boleta(request, username):
 
 @login_required()
 def generar_pdfs(request):
-	return render_to_response('facturacion/facturar.html', context_instance=RequestContext(request))
+	lista_clientes = Cliente.objects.filter(Q(status='Activo') | Q(status='Moroso')).order_by('username')
+	lista_boletas = []
+	for cliente in lista_clientes:
+		historico   = Historico.objects.filter(cliente=cliente)[:10]
+		proceso 	= Proceso.objects.filter(status='Resumen').order_by('fecha_facturacion').reverse().first()	
+		resumen_boleta 	= ResumenBoleta.objects.filter(proceso=proceso).reverse().first()
+		boleta = render_to_response('facturacion/boleta2.html',
+		{'cliente': cliente, 'historico': historico, 'proceso': proceso, 'resumen_boleta': resumen_boleta},
+		 context_instance=RequestContext(request))
+
+		html_boleta = boleta.content
+		lista_boletas.append(HTML(string=html_boleta).render()) 
+
+	paginas_boletas = [page for boleta in lista_boletas for page in boleta.pages]
+	pdf = lista_boletas[0].copy(paginas_boletas).write_pdf()
+	response = HttpResponse(pdf, mimetype='application/pdf')
+	response['Content-Disposition'] = 'filename=' + 'boletas.pdf'
+
+	return response
+	# return render_to_response('facturacion/facturar.html', context_instance=RequestContext(request))
 
 @login_required()
 def generar_pdf(request, id):
