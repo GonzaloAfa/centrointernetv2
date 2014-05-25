@@ -9,29 +9,33 @@ Sistema enfocado a administrar y facturar una pyme que ofrece un servicio mensua
 Instalación
 -------------------------
 
-Corre en tu terminal
+* Corre en tu terminal
 `wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh`
 
-Luego instala PIP (suponiendo que tienes instalado Python 2.6 o 2.7)
+* Luego instala PIP (suponiendo que tienes instalado Python 2.6 o 2.7)
 `easy_install pip`
 
-Instala virtualenv 
+* Instala virtualenv 
 `pip install virtualenv`
 
-Inicializa virtualenv
+* Inicializa virtualenv
 `virtualenv venv`
 
-Activar el virtualenv
+* Activar el virtualenv
 `source venv/bin/activate`
 
-Instalar todas las librerías externas
+* Clona el proyecto
+`git clone https://github.com/GonzaloAfa/centrointernetv2.git`
+
+
+* Instalar todas las librerías externas
 `pip install -r requirements.txt`
 
-Luego se debe crear la base de datos (SQLite) por medio de:
+* Luego se debe crear la base de datos (SQLite) por medio de:
 `python manager.py syncdb`
 
-Y para cargar algunos datos por defecto:
+* Y para cargar algunos datos por defecto:
 `python manage.py loaddata plan.json`
 
-Y finalmente para correr el sistema:
+* Finalmente para correr el sistema, ejecuta
 `foreman start`
