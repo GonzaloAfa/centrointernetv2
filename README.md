@@ -29,6 +29,9 @@ Sistema enfocado a administrar y facturar una pyme que ofrece un servicio mensua
 * Instalar todas las librerías externas
 `pip install -r requirements.txt`
 
+* Hay una librería que cuesta instalar con PIP, así que instala esto:
+`sudo apt-get install python-dev python-pip python-lxml libcairo2 libpango1.0-0 libgdk-pixbuf2.0-0 libffi-dev shared-mime-info`
+
 * Luego se debe crear la base de datos (SQLite) por medio de:
 `python manager.py syncdb`
 
