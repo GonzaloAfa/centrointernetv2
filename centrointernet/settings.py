@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import dj_database_url
+
 BASE_DIR        = os.path.dirname(os.path.dirname(__file__))
 SITE_ROOT       = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -25,7 +27,8 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+# Allow all host headers
+ALLOWED_HOSTS = ['*']
 SITE_ID = 1
 
 # Application definition
@@ -55,26 +58,24 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 )
 
+#SESSION_COOKIE_SECURE = True
+X_FRAME_OPTIONS = 'DENY'
 ROOT_URLCONF = 'centrointernet.urls'
-
 WSGI_APPLICATION = 'centrointernet.wsgi.application'
 
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE'    : 'django.db.backends.sqlite3',
-        'NAME'      : 'database2.db',
-        'USER'      : '',
-        'PASSWORD'  : '',
-        'HOST'      : '',
-        'PORT'      : '',
-    }
-}
+# Parse database configuration from $DATABASE_URL
+DATABASES= {}
+DATABASES['default'] =  dj_database_url.config(default=os.environ['DATABASE_URL'])
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -106,6 +107,7 @@ STATICFILES_FINDERS = (
 TEMPLATE_DIRS = (
     os.path.join(SITE_ROOT,'templates'),
 )
+
 
 
 MEDIA_ROOT = os.path.normpath(os.path.join(SITE_ROOT,'media/'))
