@@ -20,9 +20,9 @@
 
   <body>
       <div class="container">
-        <form class="form-signin" role="form" id="login_form" method="post" action="/login/">
+        
+        <form class="form-signin" role="form" id="login_form" method="post" action="{% url 'login' %}" autocomplete="off">{% csrf_token %}
 
-          {% csrf_token %}
           
           <input type="username" class="form-control" name="username" placeholder="Username" required autofocus>
           
