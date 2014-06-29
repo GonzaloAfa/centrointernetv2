@@ -24,8 +24,25 @@ SECRET_KEY = 'rutry8q@x(^7szp-+vo4!7#k119#&e2tdgs&)n)t4cxj)h))lz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 TEMPLATE_DEBUG = True
+#CSRF_COOKIE_SECURE =  True
+#SESSION_COOKIE_SECURE = True
+X_FRAME_OPTIONS = 'DENY'
+
+LANGUAGE_CODE = 'es-cl'
+TIME_ZONE = 'America/Santiago'
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
+
+# Redirect when login is correct.
+LOGIN_REDIRECT_URL = "/inicio"
+# Redirect when login is not correct.
+LOGIN_URL = '/'
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
@@ -61,13 +78,9 @@ MIDDLEWARE_CLASSES = (
 
 )
 
-#SESSION_COOKIE_SECURE = True
-X_FRAME_OPTIONS = 'DENY'
 ROOT_URLCONF = 'centrointernet.urls'
 WSGI_APPLICATION = 'centrointernet.wsgi.application'
 
-# Honor the 'X-Forwarded-Proto' header for request.is_secure()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
@@ -76,24 +89,12 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 DATABASES= {}
 DATABASES['default'] =  dj_database_url.config(default=os.environ['DATABASE_URL'])
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/1.6/topics/i18n/
-
-LANGUAGE_CODE = 'es-cl'
-TIME_ZONE = 'America/Santiago'
-USE_I18N = True
-USE_L10N = True
-USE_TZ = True
-
-
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-# 'django.template.loaders.eggs.Loader',
+#   'django.template.loaders.eggs.Loader',
 )
-
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -103,18 +104,16 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.DefaultStorageFinder',
  )
 
-
 TEMPLATE_DIRS = (
     os.path.join(SITE_ROOT,'templates'),
 )
-
-
 
 MEDIA_ROOT = os.path.normpath(os.path.join(SITE_ROOT,'media/'))
 MEDIA_URL = 'media/'
 
 STATIC_ROOT = os.path.join(SITE_ROOT, 'static_root', 'static')
 STATIC_URL = '/data/'
+
 
 # Configuraciones para enviar mails
 EMAIL_USE_TLS = True
@@ -124,7 +123,3 @@ EMAIL_HOST_PASSWORD = 'holamundo1313'
 EMAIL_PORT = 587
 
 
-# Redirect when login is correct.
-LOGIN_REDIRECT_URL = "/inicio"
-# Redirect when login is not correct.
-LOGIN_URL = '/'
