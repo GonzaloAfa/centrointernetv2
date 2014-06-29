@@ -9,7 +9,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
 	url(r'^$','centrointernet.views.user_login'),
-	url(r'^login/$','centrointernet.views.user_login'),
+	url(r'^login/$','centrointernet.views.user_login', name='login'),
 
 	url(r'^inicio/$','centrointernet.views.inicio'),
 	url(r'^logout/$', 'centrointernet.views.cerrar'),
