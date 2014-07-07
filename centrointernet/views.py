@@ -17,6 +17,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
 
+from django.views.decorators.csrf import csrf_protect
 
 @login_required()
 def inicio(request):
@@ -27,6 +28,7 @@ def inicio(request):
 
     return render_to_response('home/home.html', {'clients': clientes, 'problems': problemas , 'morosos': morosos, 'pays': pagos}, context_instance=RequestContext(request))
 
+@csrf_protect
 def user_login(request):
 	if not request.user.is_anonymous():
 		return HttpResponseRedirect('/inicio')
