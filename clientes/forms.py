@@ -16,9 +16,7 @@ class NuevoCliente(ModelForm):
 		if validar_rut(rut):
 			self.cleaned_data['rut'] = rut
 			return self.cleaned_data
-		raise forms.ValidationError(
-			                "Rut no es valido"
-			            )
+		raise forms.ValidationError("Rut no es valido")
 
 
 class EditarCliente(ModelForm):
@@ -31,7 +29,5 @@ class EditarCliente(ModelForm):
 		if validar_rut(rut):
 			self.cleaned_data['rut'] = rut
 			return self.cleaned_data
-		raise forms.ValidationError(
-			                "Rut no es valido"
-			            )
+		raise forms.ValidationError("Rut no es valido")
 

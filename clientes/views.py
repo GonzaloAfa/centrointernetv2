@@ -24,6 +24,9 @@ from django.core.paginator import InvalidPage
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
+from django.views.decorators.csrf import csrf_protect
+
+
 @login_required()
 def clientes(request):
     return HttpResponseRedirect('/cliente/page/1')
