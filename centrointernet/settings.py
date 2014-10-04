@@ -105,9 +105,9 @@ DATABASES = {
  DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2', 
-            'NAME': 'facturacion',
-            'USER': 'jm',
-            'PASSWORD': 'mstw4518963',
+            'NAME': '',
+            'USER': '',
+            'PASSWORD': '',
             'HOST': 'localhost',
             'PORT': '',
         }
@@ -146,8 +146,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
-
-
 # Configuraciones para enviar mails
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
@@ -155,4 +153,4 @@ EMAIL_HOST_USER = 'testcentrointernet@gmail.com'
 EMAIL_HOST_PASSWORD = 'holamundo1313'
 EMAIL_PORT = 587
 
-
+PATH='/home/jm/Facturacion'
