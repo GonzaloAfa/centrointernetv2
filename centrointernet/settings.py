@@ -24,6 +24,7 @@ SECRET_KEY = 'rutry8q@x(^7szp-+vo4!7#k119#&e2tdgs&)n)t4cxj)h))lz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
 TEMPLATE_DEBUG = True
 #CSRF_COOKIE_SECURE =  True
 #SESSION_COOKIE_SECURE = True
@@ -49,7 +50,8 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # Allow all host headers
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
 SITE_ID = 1
 
 # Application definition
@@ -90,8 +92,16 @@ WSGI_APPLICATION = 'centrointernet.wsgi.application'
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
 # Parse database configuration from $DATABASE_URL
-DATABASES= {}
-DATABASES['default'] =  dj_database_url.config(default=os.environ['DATABASE_URL'])
+#DATABASES= {}
+#DATABASES['default'] =  dj_database_url.config(default=os.environ['DATABASE_URL'])
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db-centrointernet.sqlite3'),
+    }
+}
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
