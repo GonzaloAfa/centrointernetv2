@@ -11,11 +11,9 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-import dj_database_url
+#import dj_database_url
 
 BASE_DIR        = os.path.dirname(os.path.dirname(__file__))
-SITE_ROOT       = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -35,7 +33,7 @@ CSRF_COOKIE_HTTPONLY = True
 X_FRAME_OPTIONS = 'DENY'
 
 LANGUAGE_CODE = 'es-cl'
-TIME_ZONE = 'America/Santiago'
+TIME_ZONE = 'Chile/Continental'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
@@ -103,30 +101,51 @@ DATABASES = {
     }
 }
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-#   'django.template.loaders.eggs.Loader',
+"""
+ DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2', 
+            'NAME': 'facturacion',
+            'USER': 'jm',
+            'PASSWORD': 'mstw4518963',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+    }
+"""
+
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.request',
+    'django.contrib.messages.context_processors.messages',
+    "django.core.context_processors.media",
+    'django.core.context_processors.static',
 )
+
+
+TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
+
 
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'django.contrib.staticfiles.finders.DefaultStorageFinder',
- )
-
-TEMPLATE_DIRS = (
-    os.path.join(SITE_ROOT,'templates'),
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 )
 
-MEDIA_ROOT = os.path.normpath(os.path.join(SITE_ROOT,'media/'))
-MEDIA_URL = 'media/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
 
-STATIC_ROOT = os.path.join(SITE_ROOT, 'static_root', 'static')
-STATIC_URL = '/data/'
+STATIC_URL = '/static/'
+STATIC_ROOT = ''
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+
 
 
 # Configuraciones para enviar mails

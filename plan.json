@@ -1,12 +1,20 @@
 [
-
 {
   "pk": 1, 
   "model": "clientes.servicio", 
   "fields": {
-    "precio": 8000, 
-    "plan": "The Planest", 
-    "detalle": "DETALLE DEL PLAN"
+    "precio": 14900, 
+    "plan": "Plan Normal", 
+    "detalle": "Plan de subida << y de bajada >>"
+  }
+},
+{
+  "pk": 2, 
+  "model": "clientes.servicio", 
+  "fields": {
+    "precio": 20000, 
+    "plan": "Plan Hogar", 
+    "detalle": "Plan de subida << y de bajada >>>"
   }
 }
 
